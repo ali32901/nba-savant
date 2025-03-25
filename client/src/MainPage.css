@@ -1,0 +1,120 @@
+.main-page-body{
+  display: flex;
+  gap: 10px;
+}
+
+.boxscores-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  overflow-x: scroll;
+  width: 100%;
+}
+
+.boxscores-container h1 {
+  margin: 0px 20px 0px 20px;
+}
+
+.boxscore {
+  display: grid;
+  width: 200px;
+  padding: 10px;
+  box-shadow:rgba(0, 0, 0, 0.2) 0 1px 2px 0px;
+
+}
+
+.team-score {
+  align-items: end;
+}
+
+.away, .home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.away p,.home p {
+  font-weight: bolder;
+}
+
+.record {
+ font-size: 11px;
+}
+
+.game-status {
+  font-size: smaller;
+  font-weight: 500;
+  text-align: end;
+  color: rgba(255, 38, 0, 0.774);
+}
+
+.standings-container {
+  width: 50%;
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.leaders-container {
+  width: 50%;
+  margin-right: 20px;
+  
+}
+
+.leaders-container h1 {
+  margin-bottom: 15px;
+  max-height: fit-content;
+}
+
+.stat-tables {
+  display: grid;
+  
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 300px);
+  column-gap: 30px;
+}
+
+
+
+
+
+
+
+
+@media (max-width: 1350px){
+  .boxscores-container {
+    justify-content: start;
+  }
+
+  .main-page-body {
+    display: grid;
+    place-items: center;
+  }
+
+  .leaders-container {
+    width: 100%;
+    place-items: center;
+    margin: 0;
+  }
+
+  .stat-tables {
+    width: 100%;
+    justify-items: center;
+  }
+
+  .standings {
+    width: 100%;
+    display: initial;
+  }
+
+
+
+}
+
+
+
+
+
+
+

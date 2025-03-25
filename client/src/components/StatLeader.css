@@ -1,0 +1,11 @@
+.leaders-p {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  line-clamp: 1;
+}
+
+
+.leaders-list {
+  width: 90%;
+}
