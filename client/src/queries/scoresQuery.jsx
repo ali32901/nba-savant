@@ -8,5 +8,6 @@ export function FetchScores() {
       return await res.json();
     },
     // refetchInterval: 24000,
+    // refetchIntervalInBackground: true,
   });
 }

@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Theme>
+        <Theme appearance="dark">
           <MainPage />
         </Theme>
       </QueryClientProvider>

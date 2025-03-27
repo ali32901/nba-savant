@@ -19,7 +19,7 @@ export default function StandingsTable(props) {
       <Table.Root size="1" variant="surface">
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>{props.conference}</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell width="200px">Team</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>W-L</Table.ColumnHeaderCell>
             <Table.ColumnHeaderCell>GB</Table.ColumnHeaderCell>
