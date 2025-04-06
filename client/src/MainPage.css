@@ -1,6 +1,13 @@
-.main-page-body{
-  display: flex;
+.main-page-body {
+  display: grid;
+  place-items: center;
+}
+
+.content-container{
   gap: 10px;
+  width: 70%;
+  display: flex;
+  justify-content: center;
 }
 
 .boxscores-container {
@@ -20,8 +27,6 @@
   display: grid;
   width: 200px;
   padding: 10px;
-  box-shadow:rgba(0, 0, 0, 0.2) 0 1px 2px 0px;
-
 }
 
 .team-score {
@@ -42,35 +47,145 @@
  font-size: 11px;
 }
 
-.game-status {
-  font-size: smaller;
-  font-weight: 500;
-  text-align: end;
-  color: rgba(255, 38, 0, 0.774);
-}
-
 .standings-container {
-  width: 50%;
+  
   display: flex;
   gap: 10px;
-  padding: 0 10px 0 10px
 }
 
 .leaders-container {
-  width: 50%;
-  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
   
 }
 
 .stat-tables {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 300px);
-  column-gap: 30px;
+  width: 100%;
+  margin-top: 5px;
+  height: 151px;
 }
 
+.player-profile-container {
+  flex-grow: 1;
+}
 
-@media (max-width: 1350px){
+.player-profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 150px);
+}
+
+.player-profile-stats p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+}
+.player-bio {
+  
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.player-bio.Hawks {
+  background-color: #C8102E;
+}
+.player-bio.Celtics {
+  background-color: #007A33;
+}
+.player-bio.Nets {
+  background-color: #000000;
+}
+.player-bio.Hornets {
+  background-color: #1d1160;
+}
+.player-bio.Bulls {
+  background-color: #CE1141;
+}
+.player-bio.Cavaliers {
+  background-color: #860038;
+}
+.player-bio.Mavericks {
+  background-color: #00538C;
+}
+.player-bio.Nuggets {
+  background-color: #0E2240;
+}
+.player-bio.Pistons {
+  background-color: #C8102E;
+}
+.player-bio.Warriors {
+  background-color: #1D428A;
+}
+.player-bio.Rockets {
+  background-color: #CE1141;
+}
+.player-bio.Pacers {
+  background-color: #002D62;
+}
+.player-bio.Clippers {
+  background-color: #c8102E;
+}
+.player-bio.Grizzlies {
+  background-color: #5D76A9;
+}
+.player-bio.Bucks {
+  background-color: #00471B;
+}
+.player-bio.Timberwolves {
+  background-color: #0C2340;
+}
+.player-bio.Pelicans {
+  background-color: #0C2340;
+}
+.player-bio.Thunder {
+  background-color: #007ac1;
+}
+.player-bio.Magic {
+  background-color: #0077c0;
+}
+.player-bio.\37 6ers{
+  background-color: #006bb6;
+}
+.player-bio.Suns {
+  background-color: #1d1160;
+}
+/* .player-bio.TrailBlazers {
+  background-color: #E03A3E;
+} */
+.player-bio.Kings {
+  background-color: #1d1160;
+}
+.player-bio.Spurs {
+  background-color: #c4ced4;
+}
+.player-bio.Raptors {
+  background-color: #ce1141;
+}
+.player-bio.Jazz {
+  background-color: #002B5C;
+}
+.player-bio.Wizards {
+  background-color: #002B5C;
+}
+
+.player-bio.Lakers {
+  background-color: #552583;
+}
+.player-bio.Knicks {
+  background-color: #006BB6;
+}
+
+.player-bio.Heat {
+  background-color: #98002E;
+}
+.player-bio p {
+  font-size: 11px;
+}
+
+/* @media (max-width: 1350px){
   .boxscores-container {
     justify-content: start;
   }
@@ -83,7 +198,6 @@
   .leaders-container {
     width: 100%;
     place-items: center;
-    margin: 0;
   }
 
   .stat-tables {
@@ -95,10 +209,7 @@
     width: 100%;
     display: initial;
   }
-
-
-
-}
+} */
 
 
 

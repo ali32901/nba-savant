@@ -3,8 +3,14 @@
   justify-content: space-between;
   padding-bottom: 5px;
   line-clamp: 1;
+  cursor: pointer;
+}
+
+.leaders-p:hover{
+  background-color: rgb(255, 255, 255, 0.2);
 }
 
 .leaders-list {
-  width: 90%;
+  height: 150px;
+
 }

@@ -1,53 +1,56 @@
 import { useQuery } from "@tanstack/react-query";
-import { Separator } from "@radix-ui/themes";
+import { Separator, Skeleton, SegmentedControl } from "@radix-ui/themes";
 import "./StatLeader.css";
-export default function StatLeader({ sorter, category, date }) {
+export default function StatLeader({ sorter, handleClick }) {
   const fetchStats = useQuery({
-    queryKey: [`stats${sorter}`, date],
+    queryKey: [`stats${sorter}`],
     queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:8080/api/dailystats${sorter}/${date}`
-      );
+      const res = await fetch(`http://localhost:8080/api/dailystats${sorter}`);
       return await res.json();
     },
   });
   const { data, isPending } = fetchStats;
 
   if (isPending) {
-    return <h2>Loading..</h2>;
+    return <Skeleton height="150px"></Skeleton>;
   }
 
-  function renderLeaderSwitch(player) {
-    switch (category) {
-      case "Points":
+  function renderLeaderType(player) {
+    switch (sorter) {
+      case "PTS":
         return <span>{player[28]}</span>;
-      case "Rebounds":
+      case "REB":
         return <span>{player[22]}</span>;
-      case "Assists":
+      case "AST":
         return <span>{player[23]}</span>;
-      case "Steals":
+      case "STL":
         return <span>{player[24]}</span>;
-      case "Blocks":
+      case "BLK":
         return <span>{player[25]}</span>;
+      case "FG3M":
+        return <span>{player[14]}</span>;
     }
   }
 
   return (
-    <div className="leaders-list">
-      <h2>{category}</h2>
+    <div>
+      <div className="leaders-list">
+        <Separator size="4" />
+        {data.data.slice(0, 5).map((player) => {
+          return (
+            <>
+              <p
+                className="leaders-p"
+                onClick={() => handleClick(player[2], player[1])}
+              >
+                {player[2]}
+                {renderLeaderType(player)}
+              </p>
+            </>
+          );
+        })}
+      </div>
       <Separator size="4" />
-      {data.data.slice(0, 5).map((player) => {
-        return (
-          <>
-            <p className="leaders-p">
-              {player[2]}
-              {/* <span>{player[28]}</span> */}
-              {renderLeaderSwitch(player)}
-            </p>
-            <Separator size="4" />
-          </>
-        );
-      })}
     </div>
   );
 }

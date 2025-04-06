@@ -7,7 +7,7 @@ export function FetchScores() {
       const res = await fetch("http://localhost:8080/api/scores");
       return await res.json();
     },
-    // refetchInterval: 24000,
-    // refetchIntervalInBackground: true,
+    //refetchInterval: 24000,
+    //refetchIntervalInBackground: true,
   });
 }

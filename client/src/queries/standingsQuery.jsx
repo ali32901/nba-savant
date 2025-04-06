@@ -7,6 +7,5 @@ export function FetchStandings() {
       const res = await fetch("http://localhost:8080/api/standings");
       return await res.json();
     },
-    //refetchInterval: 24000,
   });
 }
