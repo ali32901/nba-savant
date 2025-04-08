@@ -5,7 +5,7 @@ export default function StatLeader({ sorter, handleClick }) {
   const fetchStats = useQuery({
     queryKey: [`stats${sorter}`],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:8080/api/dailystats${sorter}`);
+      const res = await fetch(`http://localhost:8080/dailystats${sorter}`);
       return await res.json();
     },
   });

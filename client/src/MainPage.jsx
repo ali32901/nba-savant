@@ -2,9 +2,10 @@ import "./MainPage.css";
 import React from "react";
 import {
   Badge,
-  HoverCard,
   Separator,
   SegmentedControl,
+  Skeleton,
+  Table,
 } from "@radix-ui/themes";
 import { FetchScores } from "./queries/scoresQuery";
 import { FetchPlayerProfile } from "./queries/playerQuery";
@@ -17,7 +18,7 @@ function MainPage() {
     return useQuery({
       queryKey: ["playerbio", id],
       queryFn: async () => {
-        const res = await fetch(`http://localhost:8080/api/playerbio/${id}`);
+        const res = await fetch(`http://localhost:8080/playerbio/${id}`);
         return await res.json();
       },
     });
@@ -33,22 +34,17 @@ function MainPage() {
 
   const { data, isPending } = FetchScores();
 
-  const { data: playerData, isPending: playerPending } =
+  const { data: playerData, isPending: playerDataPending } =
     FetchPlayerProfile(playerId);
 
   const { data: playerBio, isPending: playerBioPending } =
     useFetchPlayerBio(playerId);
 
   if (isPending) {
-    return (
-      <>
-        <h1>Loading...</h1>
-      </>
-    );
+    return <></>;
   }
 
   function handleClick(name, id) {
-    console.log(name + " " + id);
     localStorage.setItem("player", name);
     localStorage.setItem("playerId", id);
     setPlayerName(name);
@@ -64,9 +60,11 @@ function MainPage() {
               <div key={game.gameId}>
                 <div className="boxscore">
                   {game.gameStatusText.includes("Final") ? (
-                    <Badge color="red">{game.gameStatusText}</Badge>
+                    <Badge color="red" radius="none">
+                      {game.gameStatusText}
+                    </Badge>
                   ) : (
-                    <Badge color="green">
+                    <Badge color="green" radius="none">
                       {game.period > 0
                         ? game.gameStatusText
                         : new Date(game.gameTimeUTC)
@@ -112,6 +110,7 @@ function MainPage() {
             defaultValue="PTS"
             onValueChange={(value) => setStat(value)}
             size="1"
+            radius="none"
           >
             <SegmentedControl.Item value="PTS">Points</SegmentedControl.Item>
             <SegmentedControl.Item value="AST">Assists</SegmentedControl.Item>
@@ -124,52 +123,96 @@ function MainPage() {
             <StatLeader sorter={stat} handleClick={handleClick} />
           </div>
 
-          {(playerPending || playerBioPending) && (
-            <h2 className="player-bio">...</h2>
-          )}
-          {playerData && playerBio && (
+          {playerDataPending || playerBioPending ? (
+            <Skeleton>
+              <div className="player-profile-container">
+                <h2 className="player-bio"></h2>
+                <div className="player-profile-stats"></div>
+              </div>
+            </Skeleton>
+          ) : (
             <div className="player-profile-container">
               <div className={`player-bio ${playerBio.data[0][19]}`}>
                 <h2>{playerName || ""}</h2>
                 <p>{`${playerBio.data[0][14]} | ${playerBio.data[0][22]} ${playerBio.data[0][19]} | ${playerBio.data[0][15]}`}</p>
               </div>
               <Separator size="4" />
-              <div className="player-profile-stats">
-                <p>
-                  PPG{" "}
-                  <span>
-                    {(playerData.data[0][26] / playerData.data[0][2]).toFixed(
-                      1
-                    )}
-                  </span>
-                </p>
-                <p>
-                  APG{" "}
-                  <span>
-                    {" "}
-                    {(playerData.data[0][19] / playerData.data[0][2]).toFixed(
-                      1
-                    )}
-                  </span>
-                </p>
-                <p>
-                  RPG{" "}
-                  <span>
-                    {" "}
-                    {(playerData.data[0][18] / playerData.data[0][2]).toFixed(
-                      1
-                    )}
-                  </span>
-                </p>
-                <p>
-                  FG% <span>{(playerData.data[0][9] * 100).toFixed(1)}</span>
-                </p>
-                <p>
-                  3P% <span>{(playerData.data[0][12] * 100).toFixed(1)}</span>
-                </p>
-                <p>
-                  FT% <span>{(playerData.data[0][15] * 100).toFixed(1)}</span>
-                </p>
+              <div className="player-careerstats">
+                <Table.Root size="1">
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.ColumnHeaderCell>TEAM</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>YEAR</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>GP</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>GS</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>MIN</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>PTS</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>AST</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>REB</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>BLK</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>STL</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>TO</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>PF</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>FG</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>3PT</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>3P%</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>FT</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell>FT%</Table.ColumnHeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {playerData.data.map((stat) => {
+                      return (
+                        <Table.Row>
+                          <Table.RowHeaderCell>{stat[4]}</Table.RowHeaderCell>
+                          <Table.Cell>{stat[1]}</Table.Cell>
+                          <Table.Cell>{stat[6]}</Table.Cell>
+                          <Table.Cell>{stat[7]}</Table.Cell>
+                          <Table.Cell>
+                            {(stat[8] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[26] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[21] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[20] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[23] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[22] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[24] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[25] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>
+                            {(stat[9] / stat[6]).toFixed(1)}-
+                            {(stat[10] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>{(stat[11] * 100).toFixed(1)}</Table.Cell>
+                          <Table.Cell>
+                            {(stat[12] / stat[6]).toFixed(1)}-
+                            {(stat[13] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>{(stat[14] * 100).toFixed(1)}</Table.Cell>
+                          <Table.Cell>
+                            {(stat[15] / stat[6]).toFixed(1)}-
+                            {(stat[16] / stat[6]).toFixed(1)}
+                          </Table.Cell>
+                          <Table.Cell>{(stat[17] * 100).toFixed(1)}</Table.Cell>
+                        </Table.Row>
+                      );
+                    })}
+                  </Table.Body>
+                </Table.Root>
               </div>
             </div>
           )}

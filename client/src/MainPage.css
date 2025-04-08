@@ -31,6 +31,7 @@
 
 .team-score {
   align-items: end;
+  padding: 0 6px 0 6px;
 }
 
 .away, .home {
@@ -50,6 +51,7 @@
 .standings-container {
   
   display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -66,7 +68,7 @@
 }
 
 .player-profile-container {
-  flex-grow: 1;
+  width: 700px;
 }
 
 .player-profile-stats {
@@ -89,6 +91,17 @@
   padding-bottom: 10px;
 }
 
+.player-career-stats{
+  height: 500px;
+  overflow: scroll;
+}
+
+.player-bio p {
+  font-size: 11px;
+}
+
+
+/*---------Team Colors--------*/
 .player-bio.Hawks {
   background-color: #C8102E;
 }
@@ -181,35 +194,17 @@
 .player-bio.Heat {
   background-color: #98002E;
 }
-.player-bio p {
-  font-size: 11px;
-}
+/*-----------------------------*/
 
-/* @media (max-width: 1350px){
+@media (max-width: 1350px){
   .boxscores-container {
     justify-content: start;
   }
 
-  .main-page-body {
-    display: grid;
-    place-items: center;
+  .content-container {
+    flex-direction: column;
   }
-
-  .leaders-container {
-    width: 100%;
-    place-items: center;
-  }
-
-  .stat-tables {
-    width: 100%;
-    justify-items: center;
-  }
-
-  .standings {
-    width: 100%;
-    display: initial;
-  }
-} */
+}
 
 
 

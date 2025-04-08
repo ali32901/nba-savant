@@ -16,7 +16,7 @@ export default function StandingsTable(props) {
 
   return (
     <div className="standings-table">
-      <Table.Root size="1" variant="surface">
+      <Table.Root size="1" variant="ghost">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>{props.conference}</Table.ColumnHeaderCell>
