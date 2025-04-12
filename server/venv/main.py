@@ -6,6 +6,7 @@ from nba_api.stats.endpoints import leaguestandings
 from nba_api.stats.endpoints import leaguegamelog
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
+from nba_api.stats.endpoints import commonallplayers
 
 from nba_api.live.nba.endpoints import scoreboard
 
@@ -53,6 +54,14 @@ def careerstats(id):
     return (
         playercareerstats.PlayerCareerStats(
             player_id=id).season_totals_regular_season.get_dict()
+    )
+
+
+@app.route("/players", methods=["GET"])
+def players():
+    return (
+        commonallplayers.CommonAllPlayers(
+            is_only_current_season=1).common_all_players.get_dict()
     )
 
 

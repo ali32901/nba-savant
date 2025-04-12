@@ -10,20 +10,20 @@
   justify-content: center;
 }
 
-.boxscores-container {
+.scores-header {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   overflow-x: auto;
   width: 100%;
+  
 }
 
-.boxscores-container h1 {
+.scores-container h1 {
   margin: 0px 20px 0px 20px;
 }
 
-.boxscore {
+.scores {
   display: grid;
   width: 200px;
   padding: 10px;
@@ -100,6 +100,22 @@
   font-size: 11px;
 }
 
+.game-leaders div {
+ display: flex;
+}
+
+.game-leaders p {
+  margin-right: 5px;
+}
+
+.game-leaders-name {
+  justify-content: center;
+  align-items: end;
+}
+
+.game-leaders-name p:nth-child(2){
+  font-size: x-small;
+}
 
 /*---------Team Colors--------*/
 .player-bio.Hawks {
@@ -165,9 +181,9 @@
 .player-bio.Suns {
   background-color: #1d1160;
 }
-/* .player-bio.TrailBlazers {
+.player-bio.Trail.Blazers {
   background-color: #E03A3E;
-} */
+}
 .player-bio.Kings {
   background-color: #1d1160;
 }
@@ -195,6 +211,10 @@
   background-color: #98002E;
 }
 /*-----------------------------*/
+
+.select-trigger {
+  margin-top: 5px;
+}
 
 @media (max-width: 1350px){
   .boxscores-container {

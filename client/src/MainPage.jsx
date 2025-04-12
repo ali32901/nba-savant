@@ -6,6 +6,8 @@ import {
   SegmentedControl,
   Skeleton,
   Table,
+  HoverCard,
+  Select,
 } from "@radix-ui/themes";
 import { FetchScores } from "./queries/scoresQuery";
 import { FetchPlayerProfile } from "./queries/playerQuery";
@@ -16,7 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 function MainPage() {
   const useFetchPlayerBio = (id) => {
     return useQuery({
-      queryKey: ["playerbio", id],
+      queryKey: ["player-bio", id],
       queryFn: async () => {
         const res = await fetch(`http://localhost:8080/playerbio/${id}`);
         return await res.json();
@@ -24,9 +26,16 @@ function MainPage() {
     });
   };
 
-  const [playerName, setPlayerName] = React.useState(
-    localStorage.getItem("player") || "LeBron James"
-  );
+  const useFetchActivePlayers = () => {
+    return useQuery({
+      queryKey: ["active-players"],
+      queryFn: async () => {
+        const res = await fetch(`http://localhost:8080/players`);
+        return await res.json();
+      },
+    });
+  };
+
   const [playerId, setPlayerId] = React.useState(
     localStorage.getItem("playerId") || 2544
   );
@@ -40,63 +49,97 @@ function MainPage() {
   const { data: playerBio, isPending: playerBioPending } =
     useFetchPlayerBio(playerId);
 
-  if (isPending) {
-    return <></>;
-  }
+  const { data: activePlayers, isPending: activePlayersPending } =
+    useFetchActivePlayers();
+
+  // if (isPending) {
+  //   return <></>;
+  // }
 
   function handleClick(name, id) {
-    localStorage.setItem("player", name);
     localStorage.setItem("playerId", id);
-    setPlayerName(name);
     setPlayerId(id);
   }
 
   return (
     <div className="main-page-body">
-      <header className="boxscores-container">
+      <header className="scores-header">
         {data &&
           data.map((game) => {
             return (
-              <div key={game.gameId}>
-                <div className="boxscore">
-                  {game.gameStatusText.includes("Final") ? (
-                    <Badge color="red" radius="none">
-                      {game.gameStatusText}
-                    </Badge>
-                  ) : (
-                    <Badge color="green" radius="none">
-                      {game.period > 0
-                        ? game.gameStatusText
-                        : new Date(game.gameTimeUTC)
-                            .toLocaleTimeString([], {
-                              hour12: true,
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })
-                            .replace(/^0(?:0:0?)?/, "")}
-                    </Badge>
-                  )}
-
-                  <div className="team-score">
-                    <div className="away">
-                      <p>{game.awayTeam.teamName}</p>
-                      <p>{game.awayTeam.score}</p>
+              <HoverCard.Root key={game.gameId}>
+                <HoverCard.Trigger>
+                  <div>
+                    <div className="scores">
+                      {game.gameStatusText.includes("Final") ? (
+                        <Badge color="red" radius="none">
+                          {game.gameStatusText}
+                        </Badge>
+                      ) : (
+                        <Badge color="green" radius="none">
+                          {game.period > 0
+                            ? game.gameStatusText
+                            : new Date(game.gameTimeUTC)
+                                .toLocaleTimeString([], {
+                                  hour12: true,
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })
+                                .replace(/^0(?:0:0?)?/, "")}
+                        </Badge>
+                      )}
+                      <div className="team-score">
+                        <div className="away">
+                          <p>{game.awayTeam.teamName}</p>
+                          <p>{game.awayTeam.score}</p>
+                        </div>
+                        <p className="record">
+                          ({game.awayTeam.wins}-{game.awayTeam.losses})
+                        </p>
+                      </div>
+                      <div className="team-score">
+                        <div className="home">
+                          <p>{game.homeTeam.teamName}</p>
+                          <p>{game.homeTeam.score}</p>
+                        </div>
+                        <p className="record">
+                          ({game.homeTeam.wins}-{game.homeTeam.losses})
+                        </p>
+                      </div>
                     </div>
-                    <p className="record">
-                      ({game.awayTeam.wins}-{game.awayTeam.losses})
-                    </p>
                   </div>
-                  <div className="team-score">
-                    <div className="home">
-                      <p>{game.homeTeam.teamName}</p>
-                      <p>{game.homeTeam.score}</p>
+                </HoverCard.Trigger>
+                <HoverCard.Content>
+                  <div className="score-hover">
+                    <div className="game-leaders">
+                      <div className="game-leaders-name">
+                        <p>{game.gameLeaders.awayLeaders.name}</p>
+                        <p>{game.gameLeaders.awayLeaders.teamTricode}</p>
+                      </div>
+                      <Separator size="4" />
+                      <div className="game-leaders-stat">
+                        <p>PTS: {game.gameLeaders.awayLeaders.points}</p>
+                        <Separator orientation="vertical" />
+                        <p>AST: {game.gameLeaders.awayLeaders.assists}</p>
+                        <Separator orientation="vertical" />
+                        <p>REB: {game.gameLeaders.awayLeaders.rebounds}</p>
+                      </div>
+                      <div className="game-leaders-name">
+                        <p>{game.gameLeaders.homeLeaders.name}</p>
+                        <p>{game.gameLeaders.homeLeaders.teamTricode}</p>
+                      </div>
+                      <Separator size="4" />
+                      <div className="game-leaders-stat">
+                        <p>PTS: {game.gameLeaders.homeLeaders.points}</p>
+                        <Separator orientation="vertical" />
+                        <p>AST: {game.gameLeaders.homeLeaders.assists}</p>
+                        <Separator orientation="vertical" />
+                        <p>REB: {game.gameLeaders.homeLeaders.rebounds}</p>
+                      </div>
                     </div>
-                    <p className="record">
-                      ({game.homeTeam.wins}-{game.homeTeam.losses})
-                    </p>
                   </div>
-                </div>
-              </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
             );
           })}
       </header>
@@ -123,7 +166,7 @@ function MainPage() {
             <StatLeader sorter={stat} handleClick={handleClick} />
           </div>
 
-          {playerDataPending || playerBioPending ? (
+          {playerDataPending || playerBioPending || activePlayersPending ? (
             <Skeleton>
               <div className="player-profile-container">
                 <h2 className="player-bio"></h2>
@@ -133,7 +176,31 @@ function MainPage() {
           ) : (
             <div className="player-profile-container">
               <div className={`player-bio ${playerBio.data[0][19]}`}>
-                <h2>{playerName || ""}</h2>
+                <Select.Root
+                  size="3"
+                  value={playerId}
+                  onValueChange={(value) => {
+                    localStorage.setItem("playerId", value.id);
+                    setPlayerId(value.id);
+                  }}
+                >
+                  <Select.Trigger variant="ghost" className="select-trigger">
+                    <h2>{playerBio.data[0][3]}</h2>
+                  </Select.Trigger>
+                  <Select.Content>
+                    {activePlayers.data.map((player) => {
+                      return (
+                        <Select.Item
+                          value={{ id: player[0], name: player[2] }}
+                          key={player[0]}
+                        >
+                          <h2>{player[2]}</h2>
+                        </Select.Item>
+                      );
+                    })}
+                  </Select.Content>
+                </Select.Root>
+
                 <p>{`${playerBio.data[0][14]} | ${playerBio.data[0][22]} ${playerBio.data[0][19]} | ${playerBio.data[0][15]}`}</p>
               </div>
               <Separator size="4" />
@@ -164,7 +231,7 @@ function MainPage() {
                   <Table.Body>
                     {playerData.data.map((stat) => {
                       return (
-                        <Table.Row>
+                        <Table.Row key={stat[1]}>
                           <Table.RowHeaderCell>{stat[4]}</Table.RowHeaderCell>
                           <Table.Cell>{stat[1]}</Table.Cell>
                           <Table.Cell>{stat[6]}</Table.Cell>

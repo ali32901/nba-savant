@@ -38,7 +38,7 @@ export default function StatLeader({ sorter, handleClick }) {
         <Separator size="4" />
         {data.data.slice(0, 5).map((player) => {
           return (
-            <>
+            <div key={player[2]}>
               <p
                 className="leaders-p"
                 onClick={() => handleClick(player[2], player[1])}
@@ -46,7 +46,7 @@ export default function StatLeader({ sorter, handleClick }) {
                 {player[2]}
                 {renderLeaderType(player)}
               </p>
-            </>
+            </div>
           );
         })}
       </div>
