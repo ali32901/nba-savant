@@ -1,16 +1,25 @@
-.leaders-p {
+
+.leaders {
+  box-shadow: 0 0 5px 1px;
+}
+.leaders__header {
+  color: black;
+  font-size: medium;
+}
+  
+.leaders__player {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 5px;
+  padding: 0px 5px 5px 0px;
   line-clamp: 1;
   cursor: pointer;
+  color: black;
+}
+  
+.leaders__player:hover{
+    background-color: rgba(41, 41, 41, 0.2);
 }
 
-.leaders-p:hover{
-  background-color: rgb(255, 255, 255, 0.2);
-}
-
-.leaders-list {
-  height: 150px;
-
+.leaders li {
+  color: black;
 }

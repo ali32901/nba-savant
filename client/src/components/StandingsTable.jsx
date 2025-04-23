@@ -1,4 +1,5 @@
 import { Table } from "@radix-ui/themes";
+import { Accordion } from "radix-ui";
 import { FetchStandings } from "../queries/standingsQuery";
 import "./StandingsTable.css";
 
@@ -33,7 +34,7 @@ export default function StandingsTable(props) {
             if (team[5] === props.conference) {
               return (
                 <Table.Row key={team[3]}>
-                  <Table.RowHeaderCell>{seed++}</Table.RowHeaderCell>
+                  <Table.Cell>{seed++}</Table.Cell>
                   <Table.Cell>{`${team[3]} ${team[4]}`}</Table.Cell>
                   <Table.Cell>{team[16]}</Table.Cell>
                   <Table.Cell>{team[37]}</Table.Cell>

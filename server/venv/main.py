@@ -7,6 +7,8 @@ from nba_api.stats.endpoints import leaguegamelog
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import commonallplayers
+from nba_api.stats.endpoints import playoffpicture
+
 
 from nba_api.live.nba.endpoints import scoreboard
 
@@ -21,17 +23,10 @@ def scores():
     )
 
 
-@app.route("/boxscore", methods=["GET"])
-def boxscore():
-    return (
-        boxscore.BoxScore
-    )
-
-
-@app.route("/dailystats<sorter>", methods=["GET"])
-def dailystats(sorter):
+@app.route("/leaders<seasonType>", methods=["GET"])
+def leaders(seasonType):
     return leaguegamelog.LeagueGameLog(
-        player_or_team_abbreviation="P", sorter=sorter, date_from_nullable=date.today(), direction="DESC").league_game_log.get_dict()
+        player_or_team_abbreviation="P", season_type_all_star=seasonType, direction="DESC").league_game_log.get_dict()
 
 
 @app.route("/standings", methods=["GET"])
@@ -62,6 +57,16 @@ def players():
     return (
         commonallplayers.CommonAllPlayers(
             is_only_current_season=1).common_all_players.get_dict()
+    )
+
+
+playoff_picture = playoffpicture.PlayoffPicture().get_dict()
+
+
+@app.route("/playoffpicture", methods=["GET"])
+def playoffpicture():
+    return (
+        playoff_picture
     )
 
 
