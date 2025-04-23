@@ -63,6 +63,7 @@ function MainPage() {
 
   return (
     <div className="body">
+      <Header />
       <div className="games">
         {data &&
           data.map((game) => {

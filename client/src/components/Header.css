@@ -7,9 +7,10 @@
   top: 0;
   z-index: 1;
   height: 40px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   margin-bottom: 20px;
+  border-bottom: 1px solid black;
 }
 
 .navs {
