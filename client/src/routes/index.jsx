@@ -1,4 +1,4 @@
-import "./MainPage.css";
+import "../MainPage.css";
 import React from "react";
 import {
   Badge,
@@ -8,15 +8,20 @@ import {
   HoverCard,
   Select,
 } from "@radix-ui/themes";
-import { FetchScores } from "./queries/scoresQuery";
-import { FetchPlayerProfile } from "./queries/playerQuery";
-import StandingsTable from "./components/standingstable";
-import StatLeader from "./components/StatLeader";
-import PlayoffPicture from "./components/PlayoffPicture";
+import { FetchScores } from "../queries/scoresQuery";
+import { FetchPlayerProfile } from "../queries/playerQuery";
+import StandingsTable from "../components/standingstable";
+import StatLeader from "../components/StatLeader";
+import PlayoffPicture from "../components/PlayoffPicture";
 import { useQuery } from "@tanstack/react-query";
-import Header from "./components/Header";
+import { createFileRoute } from "@tanstack/react-router";
+import Header from "../components/Header";
 
-function MainPage() {
+export const Route = createFileRoute("/")({
+  component: Index,
+});
+
+function Index() {
   const useFetchPlayerBio = (id) => {
     return useQuery({
       queryKey: ["player-bio", id],
@@ -63,7 +68,6 @@ function MainPage() {
 
   return (
     <div className="body">
-      <Header />
       <div className="games">
         {data &&
           data.map((game) => {
@@ -259,4 +263,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default Index;
