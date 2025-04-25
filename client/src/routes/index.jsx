@@ -1,4 +1,4 @@
-import "../MainPage.css";
+import "./styles.css";
 import React from "react";
 import {
   Badge,
@@ -10,28 +10,18 @@ import {
 } from "@radix-ui/themes";
 import { FetchScores } from "../queries/scoresQuery";
 import { FetchPlayerProfile } from "../queries/playerQuery";
+import { FetchPlayerBio } from "../queries/playerBio";
 import StandingsTable from "../components/standingstable";
 import StatLeader from "../components/StatLeader";
 import PlayoffPicture from "../components/PlayoffPicture";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import Header from "../components/Header";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
-  const useFetchPlayerBio = (id) => {
-    return useQuery({
-      queryKey: ["player-bio", id],
-      queryFn: async () => {
-        const res = await fetch(`http://localhost:8080/playerbio/${id}`);
-        return await res.json();
-      },
-    });
-  };
-
   const useFetchActivePlayers = () => {
     return useQuery({
       queryKey: ["active-players"],
@@ -52,7 +42,7 @@ function Index() {
     FetchPlayerProfile(playerId);
 
   const { data: playerBio, isPending: playerBioPending } =
-    useFetchPlayerBio(playerId);
+    FetchPlayerBio(playerId);
 
   const { data: activePlayers, isPending: activePlayersPending } =
     useFetchActivePlayers();

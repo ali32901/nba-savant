@@ -1,0 +1,18 @@
+.profile {
+  display: grid;
+  place-items: center;
+}
+
+.containers {
+  display: flex;
+  gap: 10px;
+}
+.container, .containers__bio {
+  width: 400px;
+  height: 700px;
+  border: 1px solid rgb(0, 153, 255);
+}
+
+.containers__bio {
+  text-align: center;
+}

@@ -11,18 +11,6 @@ import { routeTree } from "./routeTree.gen";
 
 const router = createRouter({ routeTree });
 const queryClient = new QueryClient({});
-// function App() {
-
-//   return (
-//     <>
-//       <QueryClientProvider client={queryClient}>
-//         <Theme>
-//           <Index />
-//         </Theme>
-//       </QueryClientProvider>
-//     </>
-//   );
-// }
 
 const rootElement = document.getElementById("root");
 if (!rootElement.innerHTML) {
@@ -37,13 +25,3 @@ if (!rootElement.innerHTML) {
     </StrictMode>
   );
 }
-
-// createRoot(document.getElementById("root")).render(
-//   <StrictMode>
-//     <QueryClientProvider client={queryClient}>
-//         <Theme>
-//           <Index />
-//         </Theme>
-//       </QueryClientProvider>
-//   </StrictMode>
-// );
