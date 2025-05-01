@@ -8,7 +8,8 @@ from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import commonallplayers
 from nba_api.stats.endpoints import playoffpicture
-
+from nba_api.stats.endpoints import playerdashboardbyshootingsplits
+from nba_api.stats.endpoints import homepageleaders
 from nba_api.live.nba.endpoints import scoreboard
 
 app = Flask(__name__)
@@ -59,6 +60,14 @@ def players():
     )
 
 
+@app.route("/playersplits<id>", methods=["GET"])
+def playersplits(id):
+    return (
+        playerdashboardbyshootingsplits.PlayerDashboardByShootingSplits(
+            player_id=id).get_dict()
+    )
+
+
 playoff_picture = playoffpicture.PlayoffPicture().get_dict()
 
 
@@ -66,6 +75,17 @@ playoff_picture = playoffpicture.PlayoffPicture().get_dict()
 def playoffpicture():
     return (
         playoff_picture
+    )
+
+
+home_page_leaders = homepageleaders.HomePageLeaders(
+    player_or_team="Player", player_scope="All Players").get_dict()
+
+
+@app.route("/homepageleaders", methods=["GET"])
+def homepageleaders():
+    return (
+        home_page_leaders
     )
 
 

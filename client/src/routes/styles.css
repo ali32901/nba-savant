@@ -7,10 +7,6 @@
   margin-bottom: 20px;
 }
 
-.nav {
-  
-}
-
 /* index.jsx */
 .body {
   display: grid;
@@ -25,7 +21,6 @@
   overflow-x: auto;
   border-bottom: none;
   width: 100%;
-  box-shadow: 0 5px 5px -2px;
 }
 
 .games__item {
@@ -76,13 +71,6 @@
   font-size: 11px;
  
 }
-.player__table {
-  height: 300px;
-  color: white;
-
-}
-
-
 
 .playoff{
   box-shadow: 0 0 5px 1px;
@@ -101,99 +89,99 @@
 
 
 /*---------Team Colors--------*/
-.player__bio--freeAgent {
+.freeAgent {
   background-color: grey;
 }
-.player__bio--Hawks {
+.Hawks {
   background-color: #C8102E;
 }
-.player__bio--Celtics {
+.Celtics {
   background-color: #007A33;
 }
-.player__bio--Nets {
+.Nets {
   background-color: #000000;
 }
-.player__bio--Hornets {
+.Hornets {
   background-color: #1d1160;
 }
-.player__bio--Bulls {
+.Bulls {
   background-color: #CE1141;
 }
-.player__bio--Cavaliers {
+.Cavaliers {
   background-color: #860038;
 }
-.player__bio--Mavericks {
+.Mavericks {
   background-color: #00538C;
 }
-.player__bio--Nuggets {
+.Nuggets {
   background-color: #0E2240;
 }
-.player__bio--Pistons {
+.Pistons {
   background-color: #C8102E;
 }
-.player__bio--Warriors {
+.Warriors {
   background-color: #1D428A;
 }
-.player__bio--Rockets {
+.Rockets {
   background-color: #CE1141;
 }
-.player__bio--Pacers {
+.Pacers {
   background-color: #002D62;
 }
-.player__bio--Clippers {
+.Clippers {
   background-color: #c8102E;
 }
-.player__bio--Grizzlies {
+.Grizzlies {
   background-color: #5D76A9;
 }
-.player__bio--Bucks {
+.Bucks {
   background-color: #00471B;
 }
-.player__bio--Timberwolves {
+.Timberwolves {
   background-color: #0C2340;
 }
-.player__bio--Pelicans {
+.Pelicans {
   background-color: #0C2340;
 }
-.player__bio--Thunder {
+.Thunder {
   background-color: #007ac1;
 }
-.player__bio--Magic {
+.Magic {
   background-color: #0077c0;
 }
-.player__bio--\37 6ers{
+.\37 6ers{
   background-color: #006bb6;
 }
-.player__bio--Suns {
+.Suns {
   background-color: #1d1160;
 }
-.player__bio--Trail.Blazers {
+.Trail.Blazers {
   background-color: #E03A3E;
 }
-.player__bio--Kings {
+.Kings {
   background-color: #1d1160;
 }
-.player__bio--Spurs {
+.Spurs {
   background-color: #c4ced4;
 }
-.player__bio--Raptors {
+.Raptors {
   background-color: #ce1141;
 }
-.player__bio--Jazz {
+.Jazz {
   background-color: #002B5C;
 }
-.player__bio--Wizards {
+.Wizards {
   background-color: #002B5C;
 }
 
-.player__bio--Lakers {
+.Lakers {
   background-color: #552583;
 }
-.player__bio--Knicks {
+.Knicks {
   background-color: #006BB6;
 }
 
-.player__bio--Heat {
+.Heat {
   background-color: #98002E;
 }
 /*-----------------------------*/

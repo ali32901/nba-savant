@@ -3,16 +3,79 @@
   place-items: center;
 }
 
-.containers {
+.profile__grid {
   display: flex;
   gap: 10px;
 }
-.container, .containers__bio {
+.profile__box {
   width: 400px;
   height: 700px;
-  border: 1px solid rgb(0, 153, 255);
+  overflow: auto;
+  border: 1px solid rgb(0, 0, 0);
+  text-align: center;
 }
 
-.containers__bio {
+.profile__career {
+  width: 400px;
+  height: 700px;
+  overflow: auto;
+  border: 1px solid rgb(0, 0, 0);
   text-align: center;
+}
+
+.profile__bio {
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.profile h1 {
+  font-size: 28px;
+}
+
+.profile__shotchart {
+  width: 400px;
+  height: 700px;
+  border: 1px solid rgb(0, 0, 0);
+  text-align: center;
+  padding: 0px;
+  overflow: auto;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 2rem;
+  list-style-type: none;
+  scroll-snap-type: x mandatory;
+  anchor-name: --profile_shotchart;
+}
+
+.profile__shotchart > li {
+  scroll-snap-align: center;
+  
+}
+
+.profile__shotchart::scroll-button(*){
+  position: absolute;
+  position-anchor: --profile_shotchart;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  
+}
+
+.profile__shotchart::scroll-button(left){
+  content: "<";
+  right: calc(anchor(left) - 30px);
+  z-index: 1;
+  
+}
+.profile__shotchart::scroll-button(right){
+  content: ">";
+  left: calc(anchor(right) - 30px);
+  z-index: 1;
+}
+
+.player__table {
+  color: white;
 }
