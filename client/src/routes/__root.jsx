@@ -2,7 +2,7 @@ import * as React from "react";
 import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { FetchScores } from "../queries/scoresQuery";
-import { Badge, HoverCard, Select } from "@radix-ui/themes";
+import { Badge, HoverCard } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import "./__root.css";
 
@@ -31,7 +31,7 @@ function RootComponent() {
           <h1>nba savant</h1>
         </Link>
         <div className="nav">
-          <Link to="/player/2544">Player</Link>
+          <Link to="/player">Player</Link>
         </div>
       </div>
       <div className="games">

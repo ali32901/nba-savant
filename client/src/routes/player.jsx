@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FetchPlayerBio } from "../queries/playerBio";
-import { Separator, Table } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import "./player.css";
 import { useState } from "react";
 
-export const Route = createFileRoute("/player/$playerId")({
+export const Route = createFileRoute("/player")({
   component: Player,
 });
 

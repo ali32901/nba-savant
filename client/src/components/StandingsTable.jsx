@@ -1,5 +1,4 @@
 import { Table } from "@radix-ui/themes";
-import { Accordion } from "radix-ui";
 import { FetchStandings } from "../queries/standingsQuery";
 import "./StandingsTable.css";
 

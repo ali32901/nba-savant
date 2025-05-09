@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton, SegmentedControl, Select } from "@radix-ui/themes";
+import { SegmentedControl } from "@radix-ui/themes";
 import "./StatLeader.css";
 import { useState } from "react";
 
