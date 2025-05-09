@@ -1,25 +1,29 @@
 
 .leaders {
   border: 1px solid #F77E56;
+  text-align: center;
 }
 .leaders__header {
   color: black;
   font-size: medium;
 }
-  
-.leaders__player {
-  display: flex;
-  justify-content: space-between;
-  padding: 0px 5px 5px 0px;
-  line-clamp: 1;
-  cursor: pointer;
-  color: black;
-}
-  
-.leaders__player:hover{
-    background-color: rgba(41, 41, 41, 0.2);
-}
 
 .leaders li {
   color: black;
+  cursor: pointer;
+  color: black; 
+  padding-right: 30px;
+}
+
+.leaders__player {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leaders__player:hover{
+  background-color: rgba(41, 41, 41, 0.2);
+}
+
+.leaders__buttons {
+  margin-bottom: 10px;
 }

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import "./StatLeader.css";
 import { useState } from "react";
+import Button from "@mui/material/Button";
 
 export default function StatLeader() {
   const [sort, setSort] = useState("PTS");
@@ -65,18 +66,40 @@ export default function StatLeader() {
     <div className="leaders">
       <h1 className="leaders__header">Season Game Highs</h1>
       <div>
-        <button onClick={() => setSeasonType("Regular Season")}>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setSeasonType("Regular Season")}
+        >
           Regular Season
-        </button>
-        <button onClick={() => setSeasonType("Playoffs")}>Playoffs</button>
+        </Button>
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => setSeasonType("Playoffs")}
+        >
+          Playoffs
+        </Button>
       </div>
-      <div>
-        <button onClick={() => setSort("PTS")}>Points</button>
-        <button onClick={() => setSort("AST")}>Assists</button>
-        <button onClick={() => setSort("REB")}>Rebounds</button>
-        <button onClick={() => setSort("STL")}>Steals</button>
-        <button onClick={() => setSort("BLK")}>Blocks</button>
-        <button onClick={() => setSort("FG3M")}>Threes</button>
+      <div className="leaders__buttons">
+        <Button size="small" variant="outlined" onClick={() => setSort("PTS")}>
+          Points
+        </Button>
+        <Button size="small" variant="outlined" onClick={() => setSort("AST")}>
+          Assists
+        </Button>
+        <Button size="small" variant="outlined" onClick={() => setSort("REB")}>
+          Rebounds
+        </Button>
+        <Button size="small" variant="outlined" onClick={() => setSort("STL")}>
+          Steals
+        </Button>
+        <Button size="small" variant="outlined" onClick={() => setSort("BLK")}>
+          Blocks
+        </Button>
+        <Button size="small" variant="outlined" onClick={() => setSort("FG3M")}>
+          Threes
+        </Button>
       </div>
       <ol>
         {dataCopy.slice(0, 10).map((player, index) => {

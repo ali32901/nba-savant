@@ -57,22 +57,22 @@ function RootComponent() {
                     </div>
                   )}
                   <div className="games__team">
-                    <div className="games__score">
-                      <p>{game.awayTeam.teamName}</p>
-                      <p>{game.awayTeam.score}</p>
-                    </div>
-                    <p className="games__record">
-                      ({game.awayTeam.wins}-{game.awayTeam.losses})
+                    <p>
+                      {game.awayTeam.teamName}{" "}
+                      <span className="games__record">
+                        ({game.awayTeam.wins}-{game.awayTeam.losses})
+                      </span>
                     </p>
+                    <p>{game.awayTeam.score}</p>
                   </div>
                   <div className="games__team">
-                    <div className="games__score">
-                      <p>{game.homeTeam.teamName}</p>
-                      <p>{game.homeTeam.score}</p>
-                    </div>
-                    <p className="games__record">
-                      ({game.homeTeam.wins}-{game.homeTeam.losses})
+                    <p>
+                      {game.homeTeam.teamName}{" "}
+                      <span className="games__record">
+                        ({game.homeTeam.wins}-{game.homeTeam.losses})
+                      </span>
                     </p>
+                    <p>{game.homeTeam.score}</p>
                   </div>
                 </div>
               </div>
