@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import "./player.css";
 import { useState } from "react";
 
-export const Route = createFileRoute("/player")({
+export const Route = createFileRoute("/player/$playerId")({
   component: Player,
 });
 
@@ -129,6 +129,7 @@ function Player() {
           <ul className="profile__shotchart">
             <li>
               <h1>Shot Distance (5ft)</h1>
+              <h2>{splits.parameters.Season}</h2>
               <Table.Root size="1">
                 <Table.Header>
                   <Table.Row>
@@ -156,6 +157,7 @@ function Player() {
             </li>
             <li>
               <h1>Shot Distance (8ft)</h1>
+              <h2>{splits.parameters.Season}</h2>
               <Table.Root size="1">
                 <Table.Header>
                   <Table.Row>
@@ -183,6 +185,7 @@ function Player() {
             </li>
             <li>
               <h1>Shot Area</h1>
+              <h2>{splits.parameters.Season}</h2>
               <Table.Root size="1">
                 <Table.Header>
                   <Table.Row>
@@ -210,6 +213,7 @@ function Player() {
             </li>
             <li>
               <h1>Shot Type Detail</h1>
+              <h2>{splits.parameters.Season}</h2>
               <Table.Root size="1">
                 <Table.Header>
                   <Table.Row>

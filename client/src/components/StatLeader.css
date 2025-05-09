@@ -1,6 +1,6 @@
 
 .leaders {
-  box-shadow: 0 0 5px 1px;
+  border: 1px solid #F77E56;
 }
 .leaders__header {
   color: black;

@@ -3,7 +3,7 @@ import { Skeleton, SegmentedControl, Select } from "@radix-ui/themes";
 import "./StatLeader.css";
 import { useState } from "react";
 
-export default function StatLeader({ handleClick }) {
+export default function StatLeader() {
   const [sort, setSort] = useState("PTS");
   const [seasonType, setSeasonType] = useState("Regular Season");
 
@@ -94,7 +94,7 @@ export default function StatLeader({ handleClick }) {
       <ol>
         {dataCopy.slice(0, 10).map((player, index) => {
           return (
-            <li key={index} onClick={() => handleClick(player[1])}>
+            <li key={index}>
               <span className="leaders__player">
                 {player[2]}
                 {renderLeaderType(player)}

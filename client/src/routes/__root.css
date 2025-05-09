@@ -1,0 +1,72 @@
+.header {
+  display: grid;
+  place-items: center;
+}
+
+.header__links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #F77E56;
+  width: 1000px;
+}
+
+.header__links h1 {
+  font-weight: 500;
+}
+
+.header__links a {
+  text-decoration: none;
+}
+.header__links a:visited {
+  color: black;
+}
+
+.header__select {
+  width: 300px;
+  height: 40px;
+  border:1px solid #F77E56;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.header__search {
+  width: 300px;
+  height: 40px;
+  
+}
+
+.header__search:focus {
+ outline: none;
+ border: 2px solid #F77E56;
+}
+
+.games {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  border: 1px solid #F77E56;
+  margin-bottom: 50px;
+}
+
+.games__item {
+  display: grid;
+  width: 200px;
+  color: black;
+  border: 1px solid #F77E56;
+}
+.games__team {
+  align-items: end;
+  padding: 0 6px 0 6px;
+}
+.games__score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bolder;
+}
+.games__record {
+ font-size: 11px;
+}

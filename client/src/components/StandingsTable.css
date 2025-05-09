@@ -16,7 +16,7 @@
 }
 
 .standings-table {
-  box-shadow: 0 0 5px 1px;
+  border: 1px solid #F77E56;
 }
 
 @media (max-width: 1350px){

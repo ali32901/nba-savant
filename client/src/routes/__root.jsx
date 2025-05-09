@@ -1,24 +1,112 @@
 import * as React from "react";
 import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import "./styles.css";
+import { FetchScores } from "../queries/scoresQuery";
+import { Badge, HoverCard, Select } from "@radix-ui/themes";
+import { useQuery } from "@tanstack/react-query";
+import "./__root.css";
 
 export const Route = createRootRoute({
   component: RootComponent,
 });
 
 function RootComponent() {
+  const FetchActivePlayers = () => {
+    return useQuery({
+      queryKey: ["active-players"],
+      queryFn: async () => {
+        const res = await fetch(`http://localhost:8080/activeplayers`);
+        return await res.json();
+      },
+    });
+  };
+
+  const { data, status } = FetchScores();
+  const { data: activePlayers } = FetchActivePlayers();
+
   return (
-    <>
-      <div className="header">
-        <h1>nba savant</h1>
+    <div className="header">
+      <div className="header__links">
+        <Link to="/">
+          <h1>nba savant</h1>
+        </Link>
         <div className="nav">
-          <Link to="/">Home</Link>
-          <Link to="/player">Player</Link>
+          <Link to="/player/2544">Player</Link>
         </div>
+      </div>
+      <div className="games">
+        {status === "pending" ? (
+          <>Loading...</>
+        ) : (
+          data.map((game) => {
+            return (
+              <HoverCard.Root key={game.gameId}>
+                <HoverCard.Trigger>
+                  <div className="games__item">
+                    {game.gameStatusText.includes("Final") ? (
+                      <Badge color="red" radius="none">
+                        {game.gameStatusText}
+                      </Badge>
+                    ) : (
+                      <Badge color="orange" radius="none">
+                        {game.period > 0
+                          ? game.gameStatusText
+                          : new Date(game.gameTimeUTC)
+                              .toLocaleTimeString([], {
+                                hour12: true,
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })
+                              .replace(/^0(?:0:0?)?/, "")}
+                      </Badge>
+                    )}
+                    <div className="games__team">
+                      <div className="games__score">
+                        <p>{game.awayTeam.teamName}</p>
+                        <p>{game.awayTeam.score}</p>
+                      </div>
+                      <p className="games__record">
+                        ({game.awayTeam.wins}-{game.awayTeam.losses})
+                      </p>
+                    </div>
+                    <div className="games__team">
+                      <div className="games__score">
+                        <p>{game.homeTeam.teamName}</p>
+                        <p>{game.homeTeam.score}</p>
+                      </div>
+                      <p className="games__record">
+                        ({game.homeTeam.wins}-{game.homeTeam.losses})
+                      </p>
+                    </div>
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content>
+                  <div>
+                    <p>{game.gameLeaders.awayLeaders.teamTricode}</p>
+                    <p>{game.gameLeaders.awayLeaders.name}</p>
+                  </div>
+                  <div>
+                    <p>PTS: {game.gameLeaders.awayLeaders.points}</p>
+                    <p>AST: {game.gameLeaders.awayLeaders.assists}</p>
+                    <p>REB: {game.gameLeaders.awayLeaders.rebounds}</p>
+                  </div>
+                  <div>
+                    <p>{game.gameLeaders.homeLeaders.teamTricode}</p>
+                    <p>{game.gameLeaders.homeLeaders.name}</p>
+                  </div>
+                  <div>
+                    <p>PTS: {game.gameLeaders.homeLeaders.points}</p>
+                    <p>AST: {game.gameLeaders.homeLeaders.assists}</p>
+                    <p>REB: {game.gameLeaders.homeLeaders.rebounds}</p>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
+            );
+          })
+        )}
       </div>
       <Outlet />
       <TanStackRouterDevtools />
-    </>
+    </div>
   );
 }

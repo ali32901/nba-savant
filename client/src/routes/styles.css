@@ -1,11 +1,3 @@
-/* __root.jsx */
-.header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid rgb(0, 153, 255);
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
 
 /* index.jsx */
 .body {
@@ -14,78 +6,23 @@
   color: rgb(224, 224, 224);
   margin-bottom: 20px;
 }
-.games {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto;
-  border-bottom: none;
-  width: 100%;
-}
-
-.games__item {
-  display: grid;
-  width: 200px;
-  padding: 10px;
-  color: black;
-}
-.games__team {
-  align-items: end;
-  padding: 0 6px 0 6px;
-  
-}
-.games__score {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bolder;
-}
-
-.games__record {
- font-size: 11px;
-}
 
 .league{
   gap: 10px;
   display: grid;
   grid-template-columns: repeat(2, 500px);
-  grid-template-rows: repeat();
+
 }
 
 .header-separator {
   margin-bottom: 10px;
 }
-.player{
-  box-shadow: 0 0 5px 1px;
-  height: 362.5px;
-}
-
-.player__select{
-  margin-top: 5px;
-  color: white;
-}
-
-.player__bio {
-  padding-left: 10px;
-  padding-bottom: 10px;
-  font-size: 11px;
- 
-}
 
 .playoff{
-  box-shadow: 0 0 5px 1px;
+  border: 1px solid #F77E56;
   grid-column-start: 1;
   grid-column-end: -1;
 }
-
-
-
-@media (max-width: 1350px){
- 
-}
-
-
-
 
 
 /*---------Team Colors--------*/

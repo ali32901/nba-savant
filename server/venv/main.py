@@ -52,8 +52,8 @@ def careerstats(id):
     )
 
 
-@app.route("/players", methods=["GET"])
-def players():
+@app.route("/activeplayers", methods=["GET"])
+def activeplayers():
     return (
         commonallplayers.CommonAllPlayers(
             is_only_current_season=1).common_all_players.get_dict()
