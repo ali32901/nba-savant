@@ -1,7 +1,5 @@
 import "./styles.css";
 import React from "react";
-import { Badge, HoverCard } from "@radix-ui/themes";
-import { FetchScores } from "../queries/scoresQuery";
 import StandingsTable from "../components/standingstable";
 import StatLeader from "../components/StatLeader";
 import PlayoffPicture from "../components/PlayoffPicture";
@@ -12,10 +10,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  // const [playerId, setPlayerId] = React.useState(
-  //   localStorage.getItem("playerId") || 2544
-  // );
-
   return (
     <div className="body">
       <div className="league">

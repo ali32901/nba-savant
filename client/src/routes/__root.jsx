@@ -2,7 +2,6 @@ import * as React from "react";
 import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { FetchScores } from "../queries/scoresQuery";
-import { Badge, HoverCard } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import "./__root.css";
 
@@ -40,67 +39,43 @@ function RootComponent() {
         ) : (
           data.map((game) => {
             return (
-              <HoverCard.Root key={game.gameId}>
-                <HoverCard.Trigger>
-                  <div className="games__item">
-                    {game.gameStatusText.includes("Final") ? (
-                      <Badge color="red" radius="none">
-                        {game.gameStatusText}
-                      </Badge>
-                    ) : (
-                      <Badge color="orange" radius="none">
-                        {game.period > 0
-                          ? game.gameStatusText
-                          : new Date(game.gameTimeUTC)
-                              .toLocaleTimeString([], {
-                                hour12: true,
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })
-                              .replace(/^0(?:0:0?)?/, "")}
-                      </Badge>
-                    )}
-                    <div className="games__team">
-                      <div className="games__score">
-                        <p>{game.awayTeam.teamName}</p>
-                        <p>{game.awayTeam.score}</p>
-                      </div>
-                      <p className="games__record">
-                        ({game.awayTeam.wins}-{game.awayTeam.losses})
-                      </p>
+              <div key={game.gameId}>
+                <div className="games__item">
+                  {game.gameStatusText.includes("Final") ? (
+                    <div>{game.gameStatusText}</div>
+                  ) : (
+                    <div>
+                      {game.period > 0
+                        ? game.gameStatusText
+                        : new Date(game.gameTimeUTC)
+                            .toLocaleTimeString([], {
+                              hour12: true,
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                            .replace(/^0(?:0:0?)?/, "")}
                     </div>
-                    <div className="games__team">
-                      <div className="games__score">
-                        <p>{game.homeTeam.teamName}</p>
-                        <p>{game.homeTeam.score}</p>
-                      </div>
-                      <p className="games__record">
-                        ({game.homeTeam.wins}-{game.homeTeam.losses})
-                      </p>
+                  )}
+                  <div className="games__team">
+                    <div className="games__score">
+                      <p>{game.awayTeam.teamName}</p>
+                      <p>{game.awayTeam.score}</p>
                     </div>
+                    <p className="games__record">
+                      ({game.awayTeam.wins}-{game.awayTeam.losses})
+                    </p>
                   </div>
-                </HoverCard.Trigger>
-                <HoverCard.Content>
-                  <div>
-                    <p>{game.gameLeaders.awayLeaders.teamTricode}</p>
-                    <p>{game.gameLeaders.awayLeaders.name}</p>
+                  <div className="games__team">
+                    <div className="games__score">
+                      <p>{game.homeTeam.teamName}</p>
+                      <p>{game.homeTeam.score}</p>
+                    </div>
+                    <p className="games__record">
+                      ({game.homeTeam.wins}-{game.homeTeam.losses})
+                    </p>
                   </div>
-                  <div>
-                    <p>PTS: {game.gameLeaders.awayLeaders.points}</p>
-                    <p>AST: {game.gameLeaders.awayLeaders.assists}</p>
-                    <p>REB: {game.gameLeaders.awayLeaders.rebounds}</p>
-                  </div>
-                  <div>
-                    <p>{game.gameLeaders.homeLeaders.teamTricode}</p>
-                    <p>{game.gameLeaders.homeLeaders.name}</p>
-                  </div>
-                  <div>
-                    <p>PTS: {game.gameLeaders.homeLeaders.points}</p>
-                    <p>AST: {game.gameLeaders.homeLeaders.assists}</p>
-                    <p>REB: {game.gameLeaders.homeLeaders.rebounds}</p>
-                  </div>
-                </HoverCard.Content>
-              </HoverCard.Root>
+                </div>
+              </div>
             );
           })
         )}

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { SegmentedControl } from "@radix-ui/themes";
 import "./StatLeader.css";
 import { useState } from "react";
 
@@ -65,32 +64,20 @@ export default function StatLeader() {
   return (
     <div className="leaders">
       <h1 className="leaders__header">Season Game Highs</h1>
-
-      <SegmentedControl.Root
-        defaultValue={seasonType}
-        size="1"
-        radius="none"
-        onValueChange={(value) => setSeasonType(value)}
-      >
-        <SegmentedControl.Item value="Regular Season">
+      <div>
+        <button onClick={() => setSeasonType("Regular Season")}>
           Regular Season
-        </SegmentedControl.Item>
-        <SegmentedControl.Item value="Playoffs">Playoffs</SegmentedControl.Item>
-      </SegmentedControl.Root>
-
-      <SegmentedControl.Root
-        defaultValue="PTS"
-        onValueChange={(value) => setSort(value)}
-        size="1"
-        radius="none"
-      >
-        <SegmentedControl.Item value="PTS">Points</SegmentedControl.Item>
-        <SegmentedControl.Item value="AST">Assists</SegmentedControl.Item>
-        <SegmentedControl.Item value="REB">Rebounds</SegmentedControl.Item>
-        <SegmentedControl.Item value="STL">Steals</SegmentedControl.Item>
-        <SegmentedControl.Item value="BLK">Blocks</SegmentedControl.Item>
-        <SegmentedControl.Item value="FG3M">Threes</SegmentedControl.Item>
-      </SegmentedControl.Root>
+        </button>
+        <button onClick={() => setSeasonType("Playoffs")}>Playoffs</button>
+      </div>
+      <div>
+        <button onClick={() => setSort("PTS")}>Points</button>
+        <button onClick={() => setSort("AST")}>Assists</button>
+        <button onClick={() => setSort("REB")}>Rebounds</button>
+        <button onClick={() => setSort("STL")}>Steals</button>
+        <button onClick={() => setSort("BLK")}>Blocks</button>
+        <button onClick={() => setSort("FG3M")}>Threes</button>
+      </div>
       <ol>
         {dataCopy.slice(0, 10).map((player, index) => {
           return (

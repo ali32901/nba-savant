@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FetchPlayerBio } from "../queries/playerBio";
-import { Table } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import "./player.css";
 import { useState } from "react";
@@ -61,65 +60,62 @@ function Player() {
           {careerStatus === "pending" ? (
             <>Loading career...</>
           ) : (
-            <Table.Root size="1">
-              <Table.Header>
-                <Table.Row>
-                  <Table.ColumnHeaderCell>TEAM</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>YEAR</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>GP</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>GS</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>MIN</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>PTS</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>AST</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>REB</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>BLK</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>STL</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>TO</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>PF</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>FG</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>3PT</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>3P%</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>FT</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell>FT%</Table.ColumnHeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {career.data.map((stat, index) => {
-                  return (
-                    <Table.Row key={index}>
-                      <Table.RowHeaderCell>{stat[4]}</Table.RowHeaderCell>
-                      <Table.Cell>{stat[1]}</Table.Cell>
-                      <Table.Cell>{stat[6]}</Table.Cell>
-                      <Table.Cell>{stat[7]}</Table.Cell>
-                      <Table.Cell>{(stat[8] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[26] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[21] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[20] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[23] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[22] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[24] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>{(stat[25] / stat[6]).toFixed(1)}</Table.Cell>
-                      <Table.Cell>
-                        {(stat[9] / stat[6]).toFixed(1)}-
-                        {(stat[10] / stat[6]).toFixed(1)}
-                      </Table.Cell>
-                      <Table.Cell>{(stat[11] * 100).toFixed(1)}</Table.Cell>
-                      <Table.Cell>
-                        {(stat[12] / stat[6]).toFixed(1)}-
-                        {(stat[13] / stat[6]).toFixed(1)}
-                      </Table.Cell>
-                      <Table.Cell>{(stat[14] * 100).toFixed(1)}</Table.Cell>
-                      <Table.Cell>
-                        {(stat[15] / stat[6]).toFixed(1)}-
-                        {(stat[16] / stat[6]).toFixed(1)}
-                      </Table.Cell>
-                      <Table.Cell>{(stat[17] * 100).toFixed(1)}</Table.Cell>
-                    </Table.Row>
-                  );
-                })}
-              </Table.Body>
-            </Table.Root>
+            <table size="1" className="">
+              <tr>
+                <th>TEAM</th>
+                <th>YEAR</th>
+                <th>GP</th>
+                <th>GS</th>
+                <th>MIN</th>
+                <th>PTS</th>
+                <th>AST</th>
+                <th>REB</th>
+                <th>BLK</th>
+                <th>STL</th>
+                <th>TO</th>
+                <th>PF</th>
+                <th>FG</th>
+                <th>FG%</th>
+                <th>3PT</th>
+                <th>3P%</th>
+                <th>FT</th>
+                <th>FT%</th>
+              </tr>
+
+              {career.data.map((stat, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{stat[4]}</td>
+                    <td>{stat[1]}</td>
+                    <td>{stat[6]}</td>
+                    <td>{stat[7]}</td>
+                    <td>{(stat[8] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[26] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[21] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[20] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[23] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[22] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[24] / stat[6]).toFixed(1)}</td>
+                    <td>{(stat[25] / stat[6]).toFixed(1)}</td>
+                    <td>
+                      {(stat[9] / stat[6]).toFixed(1)}-
+                      {(stat[10] / stat[6]).toFixed(1)}
+                    </td>
+                    <td>{(stat[11] * 100).toFixed(1)}</td>
+                    <td>
+                      {(stat[12] / stat[6]).toFixed(1)}-
+                      {(stat[13] / stat[6]).toFixed(1)}
+                    </td>
+                    <td>{(stat[14] * 100).toFixed(1)}</td>
+                    <td>
+                      {(stat[15] / stat[6]).toFixed(1)}-
+                      {(stat[16] / stat[6]).toFixed(1)}
+                    </td>
+                    <td>{(stat[17] * 100).toFixed(1)}</td>
+                  </tr>
+                );
+              })}
+            </table>
           )}
         </div>
 
@@ -130,114 +126,105 @@ function Player() {
             <li>
               <h1>Shot Distance (5ft)</h1>
               <h2>{splits.parameters.Season}</h2>
-              <Table.Root size="1">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeaderCell>Shot Type</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGA</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGM</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>eFG%</Table.ColumnHeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {splits.resultSets[1].rowSet.map((shot, index) => {
-                    return (
-                      <Table.Row key={index}>
-                        <Table.RowHeaderCell>{shot[1]}</Table.RowHeaderCell>
-                        <Table.Cell>{shot[2]}</Table.Cell>
-                        <Table.Cell>{shot[3]}</Table.Cell>
-                        <Table.Cell>{(shot[4] * 100).toFixed(1)}%</Table.Cell>
-                        <Table.Cell>{(shot[8] * 100).toFixed(1)}%</Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-              </Table.Root>
+              <table size="1">
+                <tr>
+                  <th>Shot Type</th>
+                  <th>FGA</th>
+                  <th>FGM</th>
+                  <th>FG%</th>
+                  <th>eFG%</th>
+                </tr>
+
+                {splits.resultSets[1].rowSet.map((shot, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{shot[1]}</td>
+                      <td>{shot[2]}</td>
+                      <td>{shot[3]}</td>
+                      <td>{(shot[4] * 100).toFixed(1)}%</td>
+                      <td>{(shot[8] * 100).toFixed(1)}%</td>
+                    </tr>
+                  );
+                })}
+              </table>
             </li>
             <li>
               <h1>Shot Distance (8ft)</h1>
               <h2>{splits.parameters.Season}</h2>
-              <Table.Root size="1">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeaderCell>Shot Type</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGA</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGM</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>eFG%</Table.ColumnHeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {splits.resultSets[2].rowSet.map((shot, index) => {
-                    return (
-                      <Table.Row key={index}>
-                        <Table.RowHeaderCell>{shot[1]}</Table.RowHeaderCell>
-                        <Table.Cell>{shot[2]}</Table.Cell>
-                        <Table.Cell>{shot[3]}</Table.Cell>
-                        <Table.Cell>{(shot[4] * 100).toFixed(1)}%</Table.Cell>
-                        <Table.Cell>{(shot[8] * 100).toFixed(1)}%</Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-              </Table.Root>
+              <table size="1">
+                <tr>
+                  <th>Shot Type</th>
+                  <th>FGA</th>
+                  <th>FGM</th>
+                  <th>FG%</th>
+                  <th>eFG%</th>
+                </tr>
+
+                {splits.resultSets[2].rowSet.map((shot, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{shot[1]}</td>
+                      <td>{shot[2]}</td>
+                      <td>{shot[3]}</td>
+                      <td>{(shot[4] * 100).toFixed(1)}%</td>
+                      <td>{(shot[8] * 100).toFixed(1)}%</td>
+                    </tr>
+                  );
+                })}
+              </table>
             </li>
             <li>
               <h1>Shot Area</h1>
               <h2>{splits.parameters.Season}</h2>
-              <Table.Root size="1">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeaderCell>Shot Type</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGA</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGM</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>eFG%</Table.ColumnHeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {splits.resultSets[3].rowSet.map((shot, index) => {
-                    return (
-                      <Table.Row key={index}>
-                        <Table.RowHeaderCell>{shot[1]}</Table.RowHeaderCell>
-                        <Table.Cell>{shot[2]}</Table.Cell>
-                        <Table.Cell>{shot[3]}</Table.Cell>
-                        <Table.Cell>{(shot[4] * 100).toFixed(1)}%</Table.Cell>
-                        <Table.Cell>{(shot[8] * 100).toFixed(1)}%</Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-              </Table.Root>
+              <table size="1">
+                <tr>
+                  <tr>
+                    <th>Shot Type</th>
+                    <th>FGA</th>
+                    <th>FGM</th>
+                    <th>FG%</th>
+                    <th>eFG%</th>
+                  </tr>
+                </tr>
+
+                {splits.resultSets[3].rowSet.map((shot, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{shot[1]}</td>
+                      <td>{shot[2]}</td>
+                      <td>{shot[3]}</td>
+                      <td>{(shot[4] * 100).toFixed(1)}%</td>
+                      <td>{(shot[8] * 100).toFixed(1)}%</td>
+                    </tr>
+                  );
+                })}
+              </table>
             </li>
             <li>
               <h1>Shot Type Detail</h1>
               <h2>{splits.parameters.Season}</h2>
-              <Table.Root size="1">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.ColumnHeaderCell>Shot Type</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGA</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FGM</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>FG%</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>eFG%</Table.ColumnHeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {splits.resultSets[5].rowSet.map((shot, index) => {
-                    return (
-                      <Table.Row key={index}>
-                        <Table.RowHeaderCell>{shot[1]}</Table.RowHeaderCell>
-                        <Table.Cell>{shot[2]}</Table.Cell>
-                        <Table.Cell>{shot[3]}</Table.Cell>
-                        <Table.Cell>{(shot[4] * 100).toFixed(1)}%</Table.Cell>
-                        <Table.Cell>{(shot[8] * 100).toFixed(1)}%</Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-              </Table.Root>
+              <table size="1">
+                <tr>
+                  <tr>
+                    <th>Shot Type</th>
+                    <th>FGA</th>
+                    <th>FGM</th>
+                    <th>FG%</th>
+                    <th>eFG%</th>
+                  </tr>
+                </tr>
+                {splits.resultSets[5].rowSet.map((shot, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{shot[1]}</td>
+                      <td>{shot[2]}</td>
+                      <td>{shot[3]}</td>
+                      <td>{(shot[4] * 100).toFixed(1)}%</td>
+                      <td>{(shot[8] * 100).toFixed(1)}%</td>
+                    </tr>
+                  );
+                })}
+              </table>
             </li>
           </ul>
         )}

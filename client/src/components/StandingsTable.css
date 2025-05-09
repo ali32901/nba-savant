@@ -9,18 +9,14 @@
 .lose::first-letter{
   color: red;
 }
-.skeleton-standing {
-  width: 50%;
-  height: 578px;
-  background-color: rgb(236, 235, 235);
-}
 
 .standings-table {
   border: 1px solid #F77E56;
+  color: black;
 }
 
-@media (max-width: 1350px){
+/* @media (max-width: 1350px){
   .standings-container {
     width: 100%;
   }
-}
+} */

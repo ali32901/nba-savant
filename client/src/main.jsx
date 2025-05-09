@@ -3,8 +3,6 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import "./index.css";
-import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
 import Index from "./routes/index.jsx";
 
 import { routeTree } from "./routeTree.gen";
@@ -18,9 +16,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <Theme>
-          <RouterProvider router={router} />
-        </Theme>
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </StrictMode>
   );
