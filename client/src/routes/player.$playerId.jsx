@@ -2,39 +2,43 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FetchPlayerBio } from "../queries/playerBio";
 import { useQuery } from "@tanstack/react-query";
 import "./player.css";
-import { useState } from "react";
 
-export const Route = createFileRoute("/player")({
+export const Route = createFileRoute("/player/$playerId")({
   component: Player,
 });
 
 function Player() {
-  const FetchSplits = (id) => {
+  const FetchSplits = (playerId) => {
     return useQuery({
-      queryKey: ["splits", id],
+      queryKey: ["splits", playerId],
       queryFn: async () => {
-        const res = await fetch(`http://localhost:8080/playersplits${id}`);
+        const res = await fetch(
+          `http://localhost:8080/playersplits${playerId}`
+        );
         return await res.json();
       },
-      enabled: !!id,
+      enabled: !!playerId,
     });
   };
 
-  const FetchPlayerProfile = (id) => {
+  const FetchPlayerProfile = (playerId) => {
     return useQuery({
-      queryKey: ["career-stats", id],
+      queryKey: ["career-stats", playerId],
       queryFn: async () => {
-        const res = await fetch(`http://localhost:8080/careerstats/${id}`);
+        const res = await fetch(
+          `http://localhost:8080/careerstats/${playerId}`
+        );
         return await res.json();
       },
-      enabled: !!id,
+      enabled: !!playerId,
     });
   };
 
-  const [id, setId] = useState("201939");
-  const { data: splits, status: splitsStatus } = FetchSplits(id);
-  const { data: bio, status: bioStatus } = FetchPlayerBio(id);
-  const { data: career, status: careerStatus } = FetchPlayerProfile(id);
+  const { playerId } = Route.useParams();
+  console.log(playerId);
+  const { data: splits, status: splitsStatus } = FetchSplits(playerId);
+  const { data: bio, status: bioStatus } = FetchPlayerBio(playerId);
+  const { data: career, status: careerStatus } = FetchPlayerProfile(playerId);
 
   return (
     <div className="profile">

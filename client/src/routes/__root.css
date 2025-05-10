@@ -8,8 +8,7 @@
   justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #F77E56;
-  width: 1000px;
+  width: 1250px;
 }
 
 .header__links h1 {
@@ -23,27 +22,13 @@
   color: black;
 }
 
-.header__select {
+.header__autocomplete {
   width: 300px;
-  height: 40px;
-  border:1px solid #F77E56;
-  padding-left: 5px;
-  cursor: pointer;
-}
-
-.header__search {
-  width: 300px;
-  height: 40px;
-  
-}
-
-.header__search:focus {
- outline: none;
- border: 2px solid #F77E56;
+  border-radius: 0;
 }
 
 .games {
-  width: 1000px;
+  width: 1250px;
   display: flex;
   align-items: center;
   overflow-x: auto;
@@ -51,6 +36,11 @@
   margin-bottom: 50px;
 }
 
+.games__date {
+  width: 80px;
+  text-align: center;
+  font-size: larger;
+}
 .games__item {
   display: grid;
   width: 200px;

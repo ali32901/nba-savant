@@ -1,8 +1,14 @@
 import * as React from "react";
-import { Outlet, createRootRoute, Link } from "@tanstack/react-router";
+import {
+  Outlet,
+  createRootRoute,
+  Link,
+  useNavigate,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { FetchScores } from "../queries/scoresQuery";
 import { useQuery } from "@tanstack/react-query";
+import { Autocomplete, TextField } from "@mui/material";
 import "./__root.css";
 
 export const Route = createRootRoute({
@@ -21,7 +27,11 @@ function RootComponent() {
   };
 
   const { data, status } = FetchScores();
-  const { data: activePlayers } = FetchActivePlayers();
+  const { data: activePlayers, status: activePlayersStatus } =
+    FetchActivePlayers();
+
+  const date = new Date();
+  const navigate = useNavigate();
 
   return (
     <div className="header">
@@ -30,10 +40,29 @@ function RootComponent() {
           <h1>nba savant</h1>
         </Link>
         <div className="nav">
-          <Link to="/player">Player</Link>
+          {activePlayersStatus === "pending" ? (
+            <></>
+          ) : (
+            <Autocomplete
+              className="header__autocomplete"
+              onChange={(event, newValue) =>
+                navigate({ to: `/player/${newValue.id}` })
+              }
+              options={activePlayers.data.map((player) => ({
+                label: player[1],
+                id: player[0],
+              }))}
+              renderInput={(params) => (
+                <TextField {...params} label="View Player Profile" />
+              )}
+            />
+          )}
         </div>
       </div>
       <div className="games">
+        <div className="games__date">
+          {date.getMonth() + 1}/{date.getDate()}
+        </div>
         {status === "pending" ? (
           <>Loading...</>
         ) : (
