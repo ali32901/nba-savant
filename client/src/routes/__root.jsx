@@ -53,7 +53,7 @@ function RootComponent() {
                 id: player[0],
               }))}
               renderInput={(params) => (
-                <TextField {...params} label="View Player Profile" />
+                <TextField {...params} label="Search Player Profile" />
               )}
             />
           )}

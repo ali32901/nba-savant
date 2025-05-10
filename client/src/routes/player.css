@@ -7,31 +7,39 @@
 .profile__box {
   height: 700px;
   overflow: auto;
-  border: 1px solid #F77E56;
+  border: 1px solid #399098;
   text-align: center;
 }
 
 .profile__career {
   height: 700px;
   overflow: auto;
-  border: 1px solid #F77E56;
+  border: 1px solid #399098;
   text-align: center;
+  font-weight: 500;
+}
+
+.profile__border {
+  height: 5px;
+  margin-bottom: 5px;
 }
 
 .profile__bio {
-  color: white;
+  color: black;
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: white;
 }
 
 .profile h1 {
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .profile__shotchart {
   height: 700px;
-  border: 1px solid #F77E56;
+  border: 1px solid #399098;
   text-align: center;
   padding: 0px;
   overflow: auto;

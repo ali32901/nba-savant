@@ -60,7 +60,7 @@ def activeplayers():
     )
 
 
-@app.route("/playersplits<id>", methods=["GET"])
+@app.route("/playersplits/<id>", methods=["GET"])
 def playersplits(id):
     return (
         playerdashboardbyshootingsplits.PlayerDashboardByShootingSplits(
