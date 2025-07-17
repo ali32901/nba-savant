@@ -15,10 +15,7 @@ function Index() {
       <div className="league">
         <StandingsTable conference={"East"} />
         <StandingsTable conference={"West"} />
-        <StatLeader />
-        <div className="playoff">
-          <PlayoffPicture />
-        </div>
+        {/* <StatLeader /> */}
       </div>
     </div>
   );

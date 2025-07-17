@@ -1,6 +1,8 @@
 .header {
   display: grid;
   place-items: center;
+  border-bottom: 2px solid #399098;
+  margin-bottom: 20px;
 }
 
 .header__links {
@@ -9,6 +11,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 1250px;
+  
 }
 
 .header__links h1 {
@@ -26,24 +29,61 @@
   width: 400px;
 }
 
+.header__title {
+  color: #399098 ;
+}
+
+.nav {
+  margin-bottom: 20px;
+}
+
+.nav ul {
+  list-style: none;
+}
+
+.nav ul > li > p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nav ul > li span {
+  display: none;
+  background-color: white;
+  box-shadow: 0 0 1px 0;
+  width: 200px;
+}
+
+.nav ul > li:hover span {
+  display: block;
+  position: absolute;
+}
+
+.nav__statsMenu {
+  
+}
+
 .games {
   width: 1250px;
+  height: 60px;
   display: flex;
   align-items: center;
   overflow-x: auto;
   border: 1px solid #399098;
   margin-bottom: 15px;
+  color: black;
 }
 
 .games__date {
   width: 80px;
-  text-align: center;
+  height: 100%;
   font-size: larger;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .games__item {
   display: grid;
   width: 200px;
-  color: black;
   border: 1px solid #399098;
 }
 .games__team {

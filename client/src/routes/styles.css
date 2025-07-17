@@ -3,7 +3,7 @@
 .body {
   display: grid;
   place-items: center;
-  color: rgb(224, 224, 224);
+  color: black;
   margin-bottom: 20px;
 }
 
@@ -20,7 +20,6 @@
 }
 
 .playoff{
-  border: 1px solid #399098;
   grid-column-start: 1;
   grid-column-end: -1;
 }

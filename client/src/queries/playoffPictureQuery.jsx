@@ -7,5 +7,6 @@ export function FetchPlayoffPicture() {
       const res = await fetch(`http://localhost:8080/playoffpicture`);
       return await res.json();
     },
+    staleTime: Infinity,
   });
 }

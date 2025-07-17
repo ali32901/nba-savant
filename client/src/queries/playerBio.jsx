@@ -8,5 +8,6 @@ export function FetchPlayerBio(id) {
       return await res.json();
     },
     enabled: !!id,
+    staleTime: Infinity,
   });
 }

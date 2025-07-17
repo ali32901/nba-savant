@@ -8,7 +8,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { FetchScores } from "../queries/scoresQuery";
 import { useQuery } from "@tanstack/react-query";
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, TextField, Menu } from "@mui/material";
 import "./__root.css";
 
 export const Route = createRootRoute({
@@ -30,33 +30,57 @@ function RootComponent() {
   const { data: activePlayers, status: activePlayersStatus } =
     FetchActivePlayers();
 
-  const date = new Date();
   const navigate = useNavigate();
+  const date = new Date();
 
   return (
-    <div className="header">
-      <div className="header__links">
-        <Link to="/">
-          <h1>nba savant</h1>
-        </Link>
-        <div className="nav">
-          {activePlayersStatus === "pending" ? (
-            <></>
-          ) : (
-            <Autocomplete
-              className="header__autocomplete"
-              onChange={(event, newValue) =>
-                navigate({ to: `/player/${newValue.id}` })
-              }
-              options={activePlayers.data.map((player) => ({
-                label: player[1],
-                id: player[0],
-              }))}
-              renderInput={(params) => (
-                <TextField {...params} label="Search Player Profile" />
-              )}
-            />
-          )}
+    <div className="body">
+      <div className="header">
+        <div className="header__links">
+          <Link to="/">
+            <h1 className="header__title">nba savant</h1>
+          </Link>
+          <div className="nav">
+            {activePlayersStatus === "pending" ? (
+              <></>
+            ) : (
+              <Autocomplete
+                className="header__autocomplete"
+                onChange={(event, newValue) =>
+                  navigate({ to: `/player/${newValue.id}` })
+                }
+                options={activePlayers.data.map((player) => ({
+                  label: player[1],
+                  id: player[0],
+                }))}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search Player Profile" />
+                )}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="nav">
+        <div className="nav__stats">
+          <ul>
+            <li>
+              <p>Statistics</p>
+              <span className="nav__statsMenu">
+                <p>Stats by Year</p>
+                <button
+                  onClick={() => navigate({ to: `/leaguestats/2024-25` })}
+                >
+                  2025
+                </button>
+                <button
+                  onClick={() => navigate({ to: `/leaguestats/2023-24` })}
+                >
+                  2024
+                </button>
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="games">
@@ -64,7 +88,7 @@ function RootComponent() {
           {date.getMonth() + 1}/{date.getDate()}
         </div>
         {status === "pending" ? (
-          <>Loading...</>
+          <>Getting Games...</>
         ) : (
           data.map((game) => {
             return (

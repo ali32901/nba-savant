@@ -1,0 +1,10 @@
+
+
+.league_leader_table > thead > tr > th {
+  cursor: pointer;
+}
+
+.league_leader_table > thead > tr > th:hover {
+  background-color: #3e8e99;
+  color:white
+}

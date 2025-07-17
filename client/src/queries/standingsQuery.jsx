@@ -7,5 +7,6 @@ export function FetchStandings() {
       const res = await fetch("http://localhost:8080/standings");
       return await res.json();
     },
+    staleTime: Infinity,
   });
 }

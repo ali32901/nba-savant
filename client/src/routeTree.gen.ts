@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as PlayerPlayerIdImport } from './routes/player.$playerId'
+import { Route as LeaguestatsYearImport } from './routes/leaguestats.$year'
 
 // Create/Update Routes
 
@@ -28,6 +29,12 @@ const PlayerPlayerIdRoute = PlayerPlayerIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LeaguestatsYearRoute = LeaguestatsYearImport.update({
+  id: '/leaguestats/$year',
+  path: '/leaguestats/$year',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -37,6 +44,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/leaguestats/$year': {
+      id: '/leaguestats/$year'
+      path: '/leaguestats/$year'
+      fullPath: '/leaguestats/$year'
+      preLoaderRoute: typeof LeaguestatsYearImport
       parentRoute: typeof rootRoute
     }
     '/player/$playerId': {
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/leaguestats/$year': typeof LeaguestatsYearRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/leaguestats/$year': typeof LeaguestatsYearRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/leaguestats/$year': typeof LeaguestatsYearRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/player/$playerId'
+  fullPaths: '/' | '/leaguestats/$year' | '/player/$playerId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/player/$playerId'
-  id: '__root__' | '/' | '/player/$playerId'
+  to: '/' | '/leaguestats/$year' | '/player/$playerId'
+  id: '__root__' | '/' | '/leaguestats/$year' | '/player/$playerId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LeaguestatsYearRoute: typeof LeaguestatsYearRoute
   PlayerPlayerIdRoute: typeof PlayerPlayerIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LeaguestatsYearRoute: LeaguestatsYearRoute,
   PlayerPlayerIdRoute: PlayerPlayerIdRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
+        "/leaguestats/$year",
         "/player/$playerId"
       ]
     },
     "/": {
       "filePath": "index.jsx"
+    },
+    "/leaguestats/$year": {
+      "filePath": "leaguestats.$year.jsx"
     },
     "/player/$playerId": {
       "filePath": "player.$playerId.jsx"

@@ -4,6 +4,7 @@ from datetime import date
 
 from nba_api.stats.endpoints import leaguestandings
 from nba_api.stats.endpoints import leaguegamelog
+from nba_api.stats.endpoints import leagueleaders
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import commonallplayers
@@ -68,15 +69,22 @@ def playersplits(id):
     )
 
 
-playoff_picture = playoffpicture.PlayoffPicture().get_dict()
-
-
-@app.route("/playoffpicture", methods=["GET"])
-def playoffpicture():
+@app.route("/leaguestats/<year>", methods=["GET"])
+def leaguestats(year):
     return (
-        playoff_picture
+        leagueleaders.LeagueLeaders(
+            season=year, per_mode48="PerGame").league_leaders.get_dict()
     )
 
+
+# playoff_picture = playoffpicture.PlayoffPicture().get_dict()
+
+
+# @app.route("/playoffpicture", methods=["GET"])
+# def playoffpicture():
+#     return (
+#         playoff_picture
+#     )
 
 home_page_leaders = homepageleaders.HomePageLeaders(
     player_or_team="Player", player_scope="All Players").get_dict()
