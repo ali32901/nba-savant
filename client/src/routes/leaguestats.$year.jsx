@@ -16,9 +16,13 @@ export const Route = createFileRoute("/leaguestats/$year")({
 });
 
 function LeagueStats() {
-  const [sortedData, setSortedData] = React.useState([]);
+  const [sortedData, setSortedData] = React.useState(null);
   const [orderBy, setOrderBy] = React.useState("desc");
+
   const { year } = Route.useParams();
+  const [oldYear, setOldYear] = React.useState(year);
+
+  let rank = 1;
 
   const FetchLeagueStats = (year) => {
     return useQuery({
@@ -35,6 +39,12 @@ function LeagueStats() {
 
   if (status === "pending") return <>Loading..</>;
 
+  if (oldYear !== year) {
+    const newArr = data.data.slice();
+    setSortedData(newArr);
+    setOldYear(year);
+  }
+
   function handleSort(statId) {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
     const newArr = data.data.slice().sort(function (a, b) {
@@ -44,9 +54,10 @@ function LeagueStats() {
         return -1;
       }
     });
-    console.log("sorted array");
     setSortedData(newArr);
   }
+
+  //console.table(data.data);
 
   return (
     <div>
@@ -54,6 +65,7 @@ function LeagueStats() {
         <Table className="league_leader_table">
           <TableHead>
             <TableRow>
+              <TableCell></TableCell>
               <TableCell>Player</TableCell>
               <TableCell onClick={() => handleSort(5)}>GP</TableCell>
               <TableCell onClick={() => handleSort(23)}>PTS</TableCell>
@@ -74,9 +86,10 @@ function LeagueStats() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedData.map((player) => {
+            {(sortedData ? sortedData : data.data).map((player) => {
               return (
                 <TableRow>
+                  <TableCell>{rank++}</TableCell>
                   <TableCell>{player[2]}</TableCell>
                   <TableCell>{player[5]}</TableCell>
                   <TableCell>{player[23]}</TableCell>
