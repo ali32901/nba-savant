@@ -10,6 +10,7 @@ import { FetchScores } from "../queries/scoresQuery";
 import { useQuery } from "@tanstack/react-query";
 import { Autocomplete, TextField, Menu } from "@mui/material";
 import "./__root.css";
+import logo from "../assets/basketball-seeklogo.png";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -38,9 +39,11 @@ function RootComponent() {
       <div className="header">
         <div className="header__links">
           <Link to="/">
-            <h1 className="header__title">nba savant</h1>
+            <h1 className="header__title">
+              <img src={logo} alt="" /> savant
+            </h1>
           </Link>
-          <div className="nav">
+          <div className="header__search">
             {activePlayersStatus === "pending" ? (
               <></>
             ) : (
@@ -63,24 +66,16 @@ function RootComponent() {
       </div>
       <div className="nav">
         <div className="nav__stats">
-          <ul>
-            <li>
-              <p>Statistics</p>
-              <span className="nav__statsMenu">
-                <p>Stats by Year</p>
-                <button
-                  onClick={() => navigate({ to: `/leaguestats/2024-25` })}
-                >
-                  2025
-                </button>
-                <button
-                  onClick={() => navigate({ to: `/leaguestats/2023-24` })}
-                >
-                  2024
-                </button>
-              </span>
-            </li>
-          </ul>
+          <p>Statistics</p>
+          <span className="nav__statsMenu">
+            <p>Player Statistics</p>
+            <button onClick={() => navigate({ to: `/leaguestats/2024-25` })}>
+              2025
+            </button>
+            <button onClick={() => navigate({ to: `/leaguestats/2023-24` })}>
+              2024
+            </button>
+          </span>
         </div>
       </div>
       <div className="games">

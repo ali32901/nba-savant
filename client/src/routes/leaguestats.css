@@ -1,10 +1,10 @@
 
 
-.league_leader_table > thead > tr > th {
+.league_leader_table > thead > tr > th:not(:nth-child(1)):not(:nth-child(2))  {
   cursor: pointer;
 }
 
-.league_leader_table > thead > tr > th:hover {
+.league_leader_table > thead > tr > th:hover:not(:nth-child(1)):not(:nth-child(2)) {
   background-color: #3e8e99;
   color:white
 }

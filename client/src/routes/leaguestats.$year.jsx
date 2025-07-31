@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import {
@@ -16,14 +16,14 @@ export const Route = createFileRoute("/leaguestats/$year")({
 });
 
 function LeagueStats() {
+  const navigate = useNavigate();
+
   const [sortedData, setSortedData] = React.useState(null);
   const [orderBy, setOrderBy] = React.useState("desc");
-
-  const { year } = Route.useParams();
-  const [oldYear, setOldYear] = React.useState(year);
+  const params = Route.useParams();
+  const [year, setYear] = React.useState(params.year);
 
   let rank = 1;
-
   const FetchLeagueStats = (year) => {
     return useQuery({
       queryKey: ["league-stats", year],
@@ -37,13 +37,13 @@ function LeagueStats() {
 
   const { data, status } = FetchLeagueStats(year);
 
-  if (status === "pending") return <>Loading..</>;
-
-  if (oldYear !== year) {
-    const newArr = data.data.slice();
-    setSortedData(newArr);
-    setOldYear(year);
+  if (params.year !== year) {
+    setYear(params.year);
+    setSortedData(null);
   }
+
+  //Make sure data is fetched
+  if (status === "pending") return <>Loading..</>;
 
   function handleSort(statId) {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
@@ -57,10 +57,31 @@ function LeagueStats() {
     setSortedData(newArr);
   }
 
-  //console.table(data.data);
+  function optionYears() {
+    const optionYearsArr = [];
+    for (let i = 2025; i > 1946; i--) {
+      optionYearsArr.push(
+        <option value={`${i - 1}-${String(i).slice(2)}`}>{i}</option>
+      );
+    }
+
+    return optionYearsArr;
+  }
+
+  console.table(data.data);
 
   return (
     <div>
+      <div className="dropdowns">
+        <select
+          name="years"
+          id=""
+          onChange={(e) => navigate({ to: `/leaguestats/${e.target.value}` })}
+          defaultValue={year}
+        >
+          {optionYears()}
+        </select>
+      </div>
       <TableContainer>
         <Table className="league_leader_table">
           <TableHead>

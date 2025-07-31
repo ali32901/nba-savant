@@ -30,36 +30,54 @@
 }
 
 .header__title {
-  color: #399098 ;
+  color: #399098;
+  
+}
+
+.header__title > img {
+  width: 40px;
 }
 
 .nav {
   margin-bottom: 20px;
+  width: 1250px;
+  padding-left: 50px;
 }
 
-.nav ul {
-  list-style: none;
-}
 
-.nav ul > li > p:hover {
+.nav__stats {
+  width: max-content;
+}
+.nav__stats > p:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.nav ul > li span {
-  display: none;
-  background-color: white;
-  box-shadow: 0 0 1px 0;
-  width: 200px;
-}
-
-.nav ul > li:hover span {
+.nav__stats:hover span {
   display: block;
   position: absolute;
 }
 
 .nav__statsMenu {
-  
+  display: none;
+  background-color: white;
+  box-shadow: 0 0 1px 0;
+  width: 200px;
+  padding: 10px;
+}
+
+.nav__statsMenu > p {
+  color: rgba(131, 0, 0, 0.705);
+}
+
+.nav__statsMenu > button {
+  background: none;
+  border: none;
+}
+
+.nav__statsMenu > button:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .games {

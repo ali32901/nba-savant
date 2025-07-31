@@ -77,23 +77,11 @@ def leaguestats(year):
     )
 
 
-# playoff_picture = playoffpicture.PlayoffPicture().get_dict()
-
-
-# @app.route("/playoffpicture", methods=["GET"])
-# def playoffpicture():
-#     return (
-#         playoff_picture
-#     )
-
-home_page_leaders = homepageleaders.HomePageLeaders(
-    player_or_team="Player", player_scope="All Players").get_dict()
-
-
-@app.route("/homepageleaders", methods=["GET"])
-def homepageleaders():
+@app.route("/leaguestatsall/", methods=["GET"])
+def leaguestatsall(year):
     return (
-        home_page_leaders
+        leagueleaders.LeagueLeaders(
+            per_mode48="PerGame").league_leaders.get_dict()
     )
 
 
