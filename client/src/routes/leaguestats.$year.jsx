@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   TableContainer,
@@ -21,26 +21,20 @@ function LeagueStats() {
   const [sortedData, setSortedData] = React.useState(null);
   const [orderBy, setOrderBy] = React.useState("desc");
   const params = Route.useParams();
-  const [year, setYear] = React.useState(params.year);
 
   let rank = 1;
-  const FetchLeagueStats = (year) => {
+  const FetchLeagueStats = (season) => {
     return useQuery({
-      queryKey: ["league-stats", year],
+      queryKey: ["league-stats", season],
       queryFn: async () => {
-        const res = await fetch(`http://localhost:8080/leaguestats/${year}`);
+        const res = await fetch(`http://localhost:8080/leaguestats/${season}`);
         return await res.json();
       },
-      enabled: !!year,
+      enabled: !!season,
     });
   };
 
-  const { data, status } = FetchLeagueStats(year);
-
-  if (params.year !== year) {
-    setYear(params.year);
-    setSortedData(null);
-  }
+  const { data, status } = FetchLeagueStats(params.year);
 
   //Make sure data is fetched
   if (status === "pending") return <></>;
@@ -48,7 +42,7 @@ function LeagueStats() {
   function handleSort(statId) {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
     const newArr = data.data.slice().sort(function (a, b) {
-      if (a[statId] < b[statId]) {
+      if (orderBy === "desc" ? a[statId] < b[statId] : a[statId] > b[statId]) {
         return 1;
       } else {
         return -1;
@@ -68,7 +62,7 @@ function LeagueStats() {
     return optionYearsArr;
   }
 
-  console.table(data.data);
+  // console.table(data.data);
 
   return (
     <div>
@@ -77,7 +71,7 @@ function LeagueStats() {
           name="years"
           id="select__years"
           onChange={(e) => navigate({ to: `/leaguestats/${e.target.value}` })}
-          defaultValue={year}
+          defaultValue={params.year}
         >
           {optionYears()}
         </select>

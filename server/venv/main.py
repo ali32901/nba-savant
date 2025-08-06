@@ -23,10 +23,10 @@ def scores():
     )
 
 
-@app.route("/leaders<seasonType>", methods=["GET"])
-def leaders(seasonType):
-    return leaguegamelog.LeagueGameLog(
-        player_or_team_abbreviation="P", season_type_all_star=seasonType, direction="DESC").league_game_log.get_dict()
+# @app.route("/leaders<seasonType>", methods=["GET"])
+# def leaders(seasonType):
+#     return leaguegamelog.LeagueGameLog(
+#         player_or_team_abbreviation="P", season_type_all_star=seasonType, direction="DESC").league_game_log.get_dict()
 
 
 @app.route("/standings", methods=["GET"])
