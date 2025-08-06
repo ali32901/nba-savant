@@ -43,7 +43,7 @@ function LeagueStats() {
   }
 
   //Make sure data is fetched
-  if (status === "pending") return <>Loading..</>;
+  if (status === "pending") return <></>;
 
   function handleSort(statId) {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
@@ -61,7 +61,7 @@ function LeagueStats() {
     const optionYearsArr = [];
     for (let i = 2025; i > 1946; i--) {
       optionYearsArr.push(
-        <option value={`${i - 1}-${String(i).slice(2)}`}>{i}</option>
+        <option value={`${i - 1}-${String(i).slice(2)}`}>SEASON ({i})</option>
       );
     }
 
@@ -72,10 +72,10 @@ function LeagueStats() {
 
   return (
     <div>
-      <div className="dropdowns">
+      <div className="">
         <select
           name="years"
-          id=""
+          id="select__years"
           onChange={(e) => navigate({ to: `/leaguestats/${e.target.value}` })}
           defaultValue={year}
         >

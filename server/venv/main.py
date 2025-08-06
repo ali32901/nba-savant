@@ -8,9 +8,8 @@ from nba_api.stats.endpoints import leagueleaders
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import commonallplayers
-from nba_api.stats.endpoints import playoffpicture
 from nba_api.stats.endpoints import playerdashboardbyshootingsplits
-from nba_api.stats.endpoints import homepageleaders
+
 from nba_api.live.nba.endpoints import scoreboard
 
 app = Flask(__name__)
