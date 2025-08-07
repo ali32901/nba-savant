@@ -69,10 +69,14 @@ function RootComponent() {
           <p>Statistics</p>
           <span className="nav__statsMenu">
             <p>Player Statistics</p>
-            <button onClick={() => navigate({ to: `/leaguestats/2024-25` })}>
+            <button
+              onClick={() => navigate({ to: `/leaguestats/2024-25/PerGame` })}
+            >
               2025
             </button>
-            <button onClick={() => navigate({ to: `/leaguestats/2023-24` })}>
+            <button
+              onClick={() => navigate({ to: `/leaguestats/2023-24/PerGame` })}
+            >
               2024
             </button>
           </span>
