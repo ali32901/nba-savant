@@ -15,7 +15,7 @@ export default function StandingsTable(props) {
   return (
     <div className="standings-table">
       {status === "pending" ? (
-        <div className="loader">Loading standings...</div>
+        <div className="loader"></div>
       ) : (
         <TableContainer>
           <Table>

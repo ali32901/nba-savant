@@ -13,7 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as PlayerPlayerIdImport } from './routes/player.$playerId'
-import { Route as LeaguestatsYearPerImport } from './routes/leaguestats.$year.$per'
+import { Route as LeaguestatsYearPerSeasontypeImport } from './routes/leaguestats.$year.$per.$seasontype'
 
 // Create/Update Routes
 
@@ -29,11 +29,12 @@ const PlayerPlayerIdRoute = PlayerPlayerIdImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LeaguestatsYearPerRoute = LeaguestatsYearPerImport.update({
-  id: '/leaguestats/$year/$per',
-  path: '/leaguestats/$year/$per',
-  getParentRoute: () => rootRoute,
-} as any)
+const LeaguestatsYearPerSeasontypeRoute =
+  LeaguestatsYearPerSeasontypeImport.update({
+    id: '/leaguestats/$year/$per/$seasontype',
+    path: '/leaguestats/$year/$per/$seasontype',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -53,11 +54,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlayerPlayerIdImport
       parentRoute: typeof rootRoute
     }
-    '/leaguestats/$year/$per': {
-      id: '/leaguestats/$year/$per'
-      path: '/leaguestats/$year/$per'
-      fullPath: '/leaguestats/$year/$per'
-      preLoaderRoute: typeof LeaguestatsYearPerImport
+    '/leaguestats/$year/$per/$seasontype': {
+      id: '/leaguestats/$year/$per/$seasontype'
+      path: '/leaguestats/$year/$per/$seasontype'
+      fullPath: '/leaguestats/$year/$per/$seasontype'
+      preLoaderRoute: typeof LeaguestatsYearPerSeasontypeImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +69,45 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
-  '/leaguestats/$year/$per': typeof LeaguestatsYearPerRoute
+  '/leaguestats/$year/$per/$seasontype': typeof LeaguestatsYearPerSeasontypeRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
-  '/leaguestats/$year/$per': typeof LeaguestatsYearPerRoute
+  '/leaguestats/$year/$per/$seasontype': typeof LeaguestatsYearPerSeasontypeRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/player/$playerId': typeof PlayerPlayerIdRoute
-  '/leaguestats/$year/$per': typeof LeaguestatsYearPerRoute
+  '/leaguestats/$year/$per/$seasontype': typeof LeaguestatsYearPerSeasontypeRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/player/$playerId' | '/leaguestats/$year/$per'
+  fullPaths: '/' | '/player/$playerId' | '/leaguestats/$year/$per/$seasontype'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/player/$playerId' | '/leaguestats/$year/$per'
-  id: '__root__' | '/' | '/player/$playerId' | '/leaguestats/$year/$per'
+  to: '/' | '/player/$playerId' | '/leaguestats/$year/$per/$seasontype'
+  id:
+    | '__root__'
+    | '/'
+    | '/player/$playerId'
+    | '/leaguestats/$year/$per/$seasontype'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PlayerPlayerIdRoute: typeof PlayerPlayerIdRoute
-  LeaguestatsYearPerRoute: typeof LeaguestatsYearPerRoute
+  LeaguestatsYearPerSeasontypeRoute: typeof LeaguestatsYearPerSeasontypeRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PlayerPlayerIdRoute: PlayerPlayerIdRoute,
-  LeaguestatsYearPerRoute: LeaguestatsYearPerRoute,
+  LeaguestatsYearPerSeasontypeRoute: LeaguestatsYearPerSeasontypeRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +122,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/player/$playerId",
-        "/leaguestats/$year/$per"
+        "/leaguestats/$year/$per/$seasontype"
       ]
     },
     "/": {
@@ -126,8 +131,8 @@ export const routeTree = rootRoute
     "/player/$playerId": {
       "filePath": "player.$playerId.jsx"
     },
-    "/leaguestats/$year/$per": {
-      "filePath": "leaguestats.$year.$per.jsx"
+    "/leaguestats/$year/$per/$seasontype": {
+      "filePath": "leaguestats.$year.$per.$seasontype.jsx"
     }
   }
 }

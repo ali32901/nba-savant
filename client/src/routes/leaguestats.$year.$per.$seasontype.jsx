@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import "./leaguestats.css";
 
-export const Route = createFileRoute("/leaguestats/$year/$per")({
+export const Route = createFileRoute("/leaguestats/$year/$per/$seasontype")({
   component: LeagueStats,
 });
 
@@ -23,21 +23,24 @@ function LeagueStats() {
   const params = Route.useParams();
 
   let rank = 1;
-  const FetchLeagueStats = (season, per) => {
+  const FetchLeagueStats = (year, per, seasontype) => {
     return useQuery({
-      queryKey: ["league-stats", season, per],
+      queryKey: ["league-stats", year, per, seasontype],
       queryFn: async () => {
         const res = await fetch(
-          `http://localhost:8080/leaguestats/${season}/${per}`
+          `http://localhost:8080/leaguestats/${year}/${per}/${seasontype}`
         );
         return await res.json();
       },
-      enabled: !!season,
-      enabled: !!per,
+      enabled: !!year,
     });
   };
 
-  const { data, status } = FetchLeagueStats(params.year, params.per);
+  const { data, status } = FetchLeagueStats(
+    params.year,
+    params.per,
+    params.seasontype
+  );
 
   //Make sure data is fetched
   if (status === "pending") return <></>;
@@ -76,7 +79,9 @@ function LeagueStats() {
           name="years"
           id="selects__years"
           onChange={(e) =>
-            navigate({ to: `/leaguestats/${e.target.value}/${params.per}` })
+            navigate({
+              to: `/leaguestats/${e.target.value}/${params.per}/${params.seasontype}`,
+            })
           }
           defaultValue={params.year}
         >
@@ -87,13 +92,30 @@ function LeagueStats() {
           name="per"
           id="selects__per"
           onChange={(e) =>
-            navigate({ to: `/leaguestats/${params.year}/${e.target.value}` })
+            navigate({
+              to: `/leaguestats/${params.year}/${e.target.value}/${params.seasontype}`,
+            })
           }
           defaultValue={params.per}
         >
           <option value="Totals">Totals</option>
           <option value="PerGame">Per Game</option>
           <option value="Per48">Per 48</option>
+        </select>
+
+        <select
+          name="seasontype"
+          id="selects__seasontype"
+          onChange={(e) =>
+            navigate({
+              to: `/leaguestats/${params.year}/${params.per}/${e.target.value}`,
+            })
+          }
+          defaultValue={params.seasontype}
+        >
+          <option value="Regular Season">Regular Season</option>
+          <option value="Playoffs">Playoffs</option>
+          <option value="Pre Season">Pre Season</option>
         </select>
       </div>
       <TableContainer>
@@ -103,7 +125,11 @@ function LeagueStats() {
               <TableCell></TableCell>
               <TableCell>Player</TableCell>
               <TableCell onClick={() => handleSort(5)}>GP</TableCell>
-              <TableCell onClick={() => handleSort(23)}>PTS</TableCell>
+              <TableCell
+                onClick={() => handleSort(params.per === "PerGame" ? 23 : 24)}
+              >
+                PTS
+              </TableCell>
               <TableCell onClick={() => handleSort(19)}>AST</TableCell>
               <TableCell onClick={() => handleSort(18)}>REB</TableCell>
               <TableCell onClick={() => handleSort(21)}>BLK</TableCell>

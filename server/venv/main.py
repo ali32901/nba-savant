@@ -68,11 +68,11 @@ def playersplits(id):
     )
 
 
-@app.route("/leaguestats/<year>/<per>", methods=["GET"])
-def leaguestats(year, per):
+@app.route("/leaguestats/<year>/<per>/<seasontype>", methods=["GET"])
+def leaguestats(year, per, seasontype):
     return (
         leagueleaders.LeagueLeaders(
-            season=year, per_mode48=per).league_leaders.get_dict()
+            season=year, per_mode48=per, season_type_all_star=seasontype).league_leaders.get_dict()
     )
 
 

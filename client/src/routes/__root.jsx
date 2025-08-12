@@ -70,14 +70,32 @@ function RootComponent() {
           <span className="nav__statsMenu">
             <p>Player Statistics</p>
             <button
-              onClick={() => navigate({ to: `/leaguestats/2024-25/PerGame` })}
+              onClick={() =>
+                navigate({ to: `/leaguestats/2024-25/PerGame/Regular Season` })
+              }
             >
               2025
             </button>
             <button
-              onClick={() => navigate({ to: `/leaguestats/2023-24/PerGame` })}
+              onClick={() =>
+                navigate({ to: `/leaguestats/2023-24/PerGame/Regular Season` })
+              }
             >
               2024
+            </button>
+            <button
+              onClick={() =>
+                navigate({ to: `/leaguestats/2022-23/PerGame/Regular Season` })
+              }
+            >
+              2023
+            </button>
+            <button
+              onClick={() =>
+                navigate({ to: `/leaguestats/2021-22/PerGame/Regular Season` })
+              }
+            >
+              2022
             </button>
           </span>
         </div>
