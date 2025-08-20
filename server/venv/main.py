@@ -5,6 +5,7 @@ from datetime import date
 from nba_api.stats.endpoints import leaguestandings
 from nba_api.stats.endpoints import leaguegamelog
 from nba_api.stats.endpoints import leagueleaders
+from nba_api.stats.endpoints import playerdashptshotdefend
 from nba_api.stats.endpoints import commonplayerinfo
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import commonallplayers
@@ -21,12 +22,6 @@ def scores():
     return (
         scoreboard.ScoreBoard().games.get_dict()
     )
-
-
-# @app.route("/leaders<seasonType>", methods=["GET"])
-# def leaders(seasonType):
-#     return leaguegamelog.LeagueGameLog(
-#         player_or_team_abbreviation="P", season_type_all_star=seasonType, direction="DESC").league_game_log.get_dict()
 
 
 @app.route("/standings", methods=["GET"])
@@ -73,6 +68,14 @@ def leaguestats(year, per, seasontype):
     return (
         leagueleaders.LeagueLeaders(
             season=year, per_mode48=per, season_type_all_star=seasontype).league_leaders.get_dict()
+    )
+
+
+@app.route("/shotdefend/<id>", methods=["GET"])
+def shotdefend(id):
+    return (
+        playerdashptshotdefend.PlayerDashPtShotDefend(
+            player_id=id, season="2024-25", team_id="0").defending_shots.get_dict()
     )
 
 

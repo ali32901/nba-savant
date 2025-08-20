@@ -97,6 +97,13 @@ function RootComponent() {
             >
               2022
             </button>
+            <button
+              onClick={() =>
+                navigate({ to: `/leaguestats/2020-21/PerGame/Regular Season` })
+              }
+            >
+              Older
+            </button>
           </span>
         </div>
       </div>

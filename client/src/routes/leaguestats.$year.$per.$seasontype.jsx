@@ -22,7 +22,6 @@ function LeagueStats() {
   const [orderBy, setOrderBy] = React.useState("desc");
   const params = Route.useParams();
 
-  let rank = 1;
   const FetchLeagueStats = (year, per, seasontype) => {
     return useQuery({
       queryKey: ["league-stats", year, per, seasontype],
@@ -35,7 +34,6 @@ function LeagueStats() {
       enabled: !!year,
     });
   };
-
   const { data, status } = FetchLeagueStats(
     params.year,
     params.per,
@@ -43,7 +41,9 @@ function LeagueStats() {
   );
 
   //Make sure data is fetched
-  if (status === "pending") return <></>;
+  if (status === "pending") return <>Loading...</>;
+
+  let rank = 1;
 
   function handleSort(statId) {
     setOrderBy(orderBy === "asc" ? "desc" : "asc");
